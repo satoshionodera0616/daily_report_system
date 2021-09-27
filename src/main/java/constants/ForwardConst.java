@@ -54,7 +54,7 @@ public enum ForwardConst {
     /*
      * コンストラクタ
      */
-    private FrowardConst(final String text) {
+    private ForwardConst(final String text) {
         this.text = text;
     }
 
@@ -75,7 +75,7 @@ public enum ForwardConst {
      */
     public static ForwardConst get(String key) {
         for(ForwardConst c : values()) {
-            if(c.getValue().epuals(key)) {
+            if(c.getValue().equals(key)) {
                 return c;
             }
         }

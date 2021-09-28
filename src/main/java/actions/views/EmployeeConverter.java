@@ -48,7 +48,7 @@ public class EmployeeConverter {
      * @param e Employeeのインスタンス
      * @return EmployeeViewのインスタンス
      */
-    private static EmployeeView toView(Employee e) {
+    public static EmployeeView toView(Employee e) {
 
 
         if(e == null) {

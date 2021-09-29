@@ -81,7 +81,7 @@ public abstract class ActionBase {
     }
 
 
-    /*
+    /**
      * 指定されたjspの呼び出しを行う
      * @param target 遷移先jsp画面のファイル名（拡張子を含まない）
      * @throws ServletException
@@ -92,7 +92,7 @@ public abstract class ActionBase {
 
         // jspファイルの相対パスを作成
         String forward = String.format("/WEB-INF/views/%s.jsp",target.getValue());
-        RequestDispatcher dispatcher =request.getRequestDispatcher(forward);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 
 
         // jspファイルの呼び出し

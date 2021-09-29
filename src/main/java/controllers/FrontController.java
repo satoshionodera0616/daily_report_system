@@ -21,7 +21,11 @@ public class FrontController extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
 
         // パラメータに該当するActionクラスのインスタンス
@@ -36,7 +40,12 @@ public class FrontController extends HttpServlet {
         action.process();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
@@ -60,7 +69,7 @@ public class FrontController extends HttpServlet {
 
 
             // 該当するActionオブジェクトを作成（例：リクエストからパラメータ action=Employee の場合、actions.EmployeeActionオブジェクト）
-            type = Class.forName(String.format("actions.%Action", actionString));
+            type = Class.forName(String.format("actions.%sAction", actionString));
 
             // ActionBaseのオブジェクトにキャスト（例：actions.EmployeeActionオブジェクト→actions.ActionBaseオブジェクト）
             action = (ActionBase)(type.asSubclass(ActionBase.class)

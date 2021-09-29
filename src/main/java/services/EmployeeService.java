@@ -62,8 +62,8 @@ public class EmployeeService extends ServiceBase{
 
             // 社員番号とハッシュ化済みパスワードを条件に未削除の従業員を1件取得する
             e = em.createNamedQuery(JpaConst.Q_EMP_GET_BY_CODE_AND_PASS,Employee.class)
-                    .setParameter(JpaConst.JPQL_PARAM_CODE,code)
-                    .setParameter(JpaConst.JPQL_PARAM_PASSWORD,pass)
+                    .setParameter(JpaConst.JPQL_PARM_CODE,code)
+                    .setParameter(JpaConst.JPQL_PARM_PASSWORD,pass)
                     .getSingleResult();
 
         }catch(NoResultException ex) {
@@ -98,7 +98,7 @@ public class EmployeeService extends ServiceBase{
 
         // 指定した社員番号を保持する従業員の件数を取得する
         long employees_count = (long)em.createNamedQuery(JpaConst.Q_EMP_COUNT_RESISTERED_BY_CODE, Long.class)
-                .setParameter(JpaConst.JPQL_PARAM_CODE, code)
+                .setParameter(JpaConst.JPQL_PARM_CODE, code)
                 .getSingleResult();
         return employees_count;
     }

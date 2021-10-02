@@ -48,6 +48,8 @@ public class EmployeeAction  extends ActionBase {
      */
     public void index() throws ServletException, IOException{
 
+        // 管理者かどうかのチェック
+        if(checkAdmin()) {
 
         //指定されたページ数の一覧画面に表示するデータを取得
         int page = getPage();
@@ -74,7 +76,7 @@ public class EmployeeAction  extends ActionBase {
 
         //一覧画面を表示する
         forward(ForwardConst.FW_EMP_INDEX);
-
+        }
 
     }
 
@@ -86,6 +88,8 @@ public class EmployeeAction  extends ActionBase {
      */
     public void entryNew() throws ServletException,IOException{
 
+        // 管理者かどうかのチェック
+        if(checkAdmin()) {
 
         putRequestScope(AttributeConst.TOKEN, getTokenId()); // CSRF対策用トークン
         putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView()); // 空の従業員インスタンス
@@ -93,6 +97,8 @@ public class EmployeeAction  extends ActionBase {
 
         // 新規登録画面を表示
         forward(ForwardConst.FW_EMP_NEW);
+
+        }
     }
 
 
@@ -103,9 +109,9 @@ public class EmployeeAction  extends ActionBase {
      */
     public void create() throws ServletException,IOException{
 
-
+        // 管理者かどうかのチェック
         //CSRF対策 tokenのチェック
-        if(checkToken()) {
+        if(checkAdmin() && checkToken()) {
 
 
             // パラメータの値を元に従業員情報のインスタンスを作成する
@@ -163,6 +169,9 @@ public class EmployeeAction  extends ActionBase {
      */
     public void show() throws ServletException, IOException {
 
+     // 管理者かどうかのチェック
+        if(checkAdmin()) {
+
         //idを条件に従業員データを取得する
         EmployeeView ev = service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
 
@@ -177,6 +186,8 @@ public class EmployeeAction  extends ActionBase {
 
         //詳細画面を表示
         forward(ForwardConst.FW_EMP_SHOW);
+
+        }
     }
 
 
@@ -186,6 +197,9 @@ public class EmployeeAction  extends ActionBase {
      * @throws IOException
      */
     public void edit() throws ServletException, IOException {
+
+     // 管理者かどうかのチェック
+        if(checkAdmin()) {
 
 
         // idを条件に従業員データを取得する
@@ -207,6 +221,8 @@ public class EmployeeAction  extends ActionBase {
 
         // 編集画面を表示する
         forward(ForwardConst.FW_EMP_EDIT);
+
+        }
     }
 
 
@@ -217,9 +233,9 @@ public class EmployeeAction  extends ActionBase {
      */
     public void update() throws ServletException, IOException{
 
-
+        // 管理者かどうかのチェック
         // CSRF対策 tokenのチェック
-        if(checkToken()) {
+        if(checkAdmin() &&  checkToken()) {
             // パラメータの値を元に従業員情報のインスタンスを作成する
             EmployeeView ev = new EmployeeView(
                     toNumber(getRequestParam(AttributeConst.EMP_ID)),
@@ -272,9 +288,9 @@ public class EmployeeAction  extends ActionBase {
      */
     public void destroy() throws ServletException,IOException{
 
-
+        // 管理者かどうかのチェック
         // CSRF対策 tokenのチェック
-        if(checkToken()) {
+        if(checkAdmin() && checkToken()) {
 
             // idを条件に従業員データを倫理削除する
             service.destroy(toNumber(getRequestParam(AttributeConst.EMP_ID)));
@@ -286,6 +302,35 @@ public class EmployeeAction  extends ActionBase {
 
             // 一覧画面にリダイレクト
             redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
+        }
+    }
+
+
+    /*
+     * ログイン中の従業員が管理者かどうかチェックし、管理者でなければエラー画面を表示
+     * true: 管理者false: 管理者ではない
+     * @throws ServletException
+     * @throws IOException
+     */
+    private boolean checkAdmin() throws ServletException, IOException{
+
+
+        // セッションからログイン中の従業員情報を取得
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+
+        // 管理者でなければエラー画面を表示
+        if(ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
+
+
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+            return false;
+
+
+        }else {
+
+
+            return true;
         }
     }
 

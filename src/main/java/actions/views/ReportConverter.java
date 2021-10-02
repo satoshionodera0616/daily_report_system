@@ -99,6 +99,7 @@ public class ReportConverter {
         rv.setEmployee(EmployeeConverter.toView(r.getEmployee()));
         rv.setReportDate(r.getReportDate());
         rv.setTitle(r.getTitle());
+        rv.setCreatedAt(r.getCreatedAt());
         rv.setUpdatedAt(r.getUpdatedAt());
     }
 

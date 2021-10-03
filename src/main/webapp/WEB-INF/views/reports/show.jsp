@@ -23,6 +23,7 @@
                 </tr>
                 <tr>
                     <th>日付</th>
+                    <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date"/>
                     <td><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                 </tr>
                 <tr>

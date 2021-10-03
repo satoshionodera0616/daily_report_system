@@ -35,10 +35,10 @@ import lombok.Setter;
             query = JpaConst.Q_REP_COUNT_DEF),
     @NamedQuery(
             name = JpaConst.Q_REP_GET_ALL_MINE,
-            query = JpaConst.Q_REP_GET_ALL_DEF),
+            query = JpaConst.Q_REP_GET_ALL_MINE_DEF),
     @NamedQuery(
             name = JpaConst.Q_REP_COUNT_ALL_MINE,
-            query = JpaConst.Q_REP_GET_ALL_MINE_DEF)
+            query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF)
 })
 
 
@@ -96,6 +96,10 @@ public class Report {
     @Column(name = JpaConst.REP_COL_CREATED_AT, nullable = false)
     private LocalDateTime createdAt;
 
+
+    /*
+     * 更新日時
+     */
     @Column(name = JpaConst.REP_COL_UPDATED_AT, nullable = false)
     private LocalDateTime updatedAt;
 

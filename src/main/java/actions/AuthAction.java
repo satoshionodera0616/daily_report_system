@@ -114,7 +114,8 @@ public class AuthAction extends ActionBase {
 
 
             //ログイン画面を表示
-            forward(ForwardConst.FW_LOGIN);
+           forward(ForwardConst.FW_LOGIN);
+
         }
     }
 

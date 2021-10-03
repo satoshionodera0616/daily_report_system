@@ -37,6 +37,7 @@ public class ReportAction extends ActionBase {
 
         //メソッドを実行
         invoke();
+
         service.close();
     }
 

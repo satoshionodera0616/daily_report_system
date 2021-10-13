@@ -27,6 +27,12 @@
                     <td><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                 </tr>
                 <tr>
+                    <th>取引先の名前</th>
+                </tr>
+                <tr>
+                    <th>商談状況</th>
+                </tr>
+                <tr>
                     <th>内容</th>
                     <td><pre><c:out value="${report.content}" /></pre></td> <%--pre 改行を改行のままで表示 中の文字列表示が小文字になる --%>
                 </tr>

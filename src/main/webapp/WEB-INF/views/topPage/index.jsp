@@ -56,5 +56,23 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
+        <br /><br />
+
+
+        <h3>【自分の報告 一覧】</h3>
+        <table id="">
+            <tbody>
+                <tr>
+                    <th class=>報告者</th>
+                    <th class=>ご意見を頂戴した日付</th>
+                    <th class=>概要</th>
+                    <th class=>操作</th>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+        <p><a href="<c:url value='' />">新規報告の作成</a>
     </c:param>
 </c:import>

@@ -28,13 +28,6 @@
 <input type="text" name="${AttributeConst.REP_TITLE.getValue()}" value="${report.title}" />
 <br /><br />
 
-<label>取引先名</label><br />
-<input type="text" name="" value="" />
-<br /><br />
-
-<label>商談状況</label><br />
-<input type="text" name="" value=""/>
-<br /><br />
 
 <label for="${AttributeConst.REP_CONTENT.getValue()}">内容</label><br />
 <textarea name="${AttributeConst.REP_CONTENT.getValue()}" rows="10" cols="50">${report.content}</textarea>

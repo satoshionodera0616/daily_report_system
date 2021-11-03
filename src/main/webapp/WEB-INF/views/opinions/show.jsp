@@ -12,19 +12,23 @@
     <c:param name="content">
 
 
-        <h2>日報 詳細ページ</h2>
+        <h2>ご意見・ご要望 詳細ページ</h2>
 
 
         <table>
             <tbody>
                 <tr>
-                    <th>氏名</th>
+                    <th>報告者</th>
                     <td><c:out value="${report.employee.name}" /></td>
                 </tr>
                 <tr>
-                    <th>日付</th>
+                    <th>ご意見を頂戴した日付</th>
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date"/>
                     <td><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
+                </tr>
+                <tr>
+                    <th>概要</th>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>内容</th>
@@ -46,9 +50,24 @@
 
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>
-                <a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
+                <a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">報告内容を編集する</a>
             </p>
         </c:if>
+        <br /><br />
+
+
+        <h3>【この報告に対するコメント 一覧】</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <th>作成者</th>
+                    <th>コメントされた日付</th>
+                    <th>コメント</th>
+                    <th>操作</th>
+                </tr>
+            </tbody>
+        </table>
+
 
         <p>
             <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>

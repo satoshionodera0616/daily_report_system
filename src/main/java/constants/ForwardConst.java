@@ -13,6 +13,7 @@ public enum ForwardConst {
     ACT_TOP("Top"),
     ACT_EMP("Employee"),
     ACT_REP("Report"),
+    ACT_OPI("Opinion"),
     ACT_AUTH("Auth"),
 
 
@@ -42,7 +43,12 @@ public enum ForwardConst {
     FW_REP_INDEX("reports/index"),
     FW_REP_SHOW("reports/show"),
     FW_REP_NEW("reports/new"),
-    FW_REP_EDIT("reports/edit");
+    FW_REP_EDIT("reports/edit"),
+    FW_OPI_INDEX("opinions/index"),
+    FW_OPI_SHOW("opinions/show"),
+    FW_OPI_NEW("opinions/new"),
+    FW_OPI_EDIT("opinions/edit");
+
 
 
     /*

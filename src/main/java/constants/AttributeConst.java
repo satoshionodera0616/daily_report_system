@@ -59,7 +59,17 @@ public enum AttributeConst {
     REP_ID("id"),
     REP_DATE("report_date"),
     REP_TITLE("title"),
-    REP_CONTENT("content");
+    REP_CONTENT("content"),
+
+
+    // ご意見・ご要望管理
+    OPINION("opinion"),
+    OPINIONS("opinions"),
+    OPI_COUNT("opinion_count"),
+    OPI_ID("id"),
+    OPI_DATE("opinion_date"),
+    OPI_OVERVIEW("overview"),
+    OPI_CONTENT("content");
 
 
     private final String text;

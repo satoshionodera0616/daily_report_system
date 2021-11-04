@@ -48,10 +48,22 @@ public interface JpaConst {
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
 
+    // ご意見・ご要望テーブル
+    String TABLE_OPI = "opinions";// テーブル名
+    // ご意見・ご要望テーブルカラム
+    String OPI_COL_ID = "id";// id
+    String OPI_COL_EMP = "employee_id"; // ご意見・ご要望を報告した従業員のid
+    String OPI_COL_OPI = "opinion_date"; // ご意見・ご要望を頂いた日付
+    String OPI_COL_OVERVIEW = "overview"; // ご意見・ご要望の概要
+    String OPI_COL_CONTENT = "content"; // ご意見・ご要望の内容
+    String OPI_COL_CREATED_AT = "created_at"; // 登録日時
+    String OPI_COL_UPDATED_AT = "updated_at"; // 更新日時
+
+
     // Entity名
     String ENTITY_EMP = "employee";//従業員
     String ENTITY_REP = "report";//日報
-
+    String ENTITY_OPI = "opinion"; // ご意見・ご要望
 
     // JPQL内パラメータ
     String JPQL_PARM_CODE = "code";//社員番号
@@ -84,6 +96,17 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
-
+   //NEW! 全てのご意見・ご要望をidの降順に取得する
+    String Q_OPI_GET_ALL = ENTITY_OPI + ".getAll";
+    String Q_OPI_GET_ALL_DEF = "SELECT o FROM Opinion AS o ORDER BY o.id DESC";
+    //NEW! 全てのご意見・ご要望の件数を取得する
+    String Q_OPI_COUNT = ENTITY_OPI + ".count";
+    String Q_OPI_COUNT_DEF = "SELECT COUNT(o) FROM Opinion AS o";
+    //NEW! 指定した従業員が作成したご意見・ご要望を全件idの降順で取得する
+    String Q_OPI_GET_ALL_MINE = ENTITY_OPI + ".getAllMine";
+    String Q_OPI_GET_ALL_MINE_DEF = "SELECT o FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE + "ORDER BY o.id DESC";
+    //NEW! 指定した従業員が報告したご意見・ご要望の件数を取得する
+    String Q_OPI_COUNT_ALL_MINE = ENTITY_OPI + ".countAllMine";
+    String Q_OPI_COUNT_ALL_MINE_DEF = "SELECT COUNT(o) FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE;
 
 }

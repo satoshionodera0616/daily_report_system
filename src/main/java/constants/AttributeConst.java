@@ -68,7 +68,7 @@ public enum AttributeConst {
     OPI_COUNT("opinion_count"),
     OPI_ID("id"),
     OPI_DATE("opinion_date"),
-    OPI_OVERVIEW("overview"),
+    OPI_OVERVIEW("overView"),
     OPI_CONTENT("content");
 
 

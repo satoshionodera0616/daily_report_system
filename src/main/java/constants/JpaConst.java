@@ -54,7 +54,7 @@ public interface JpaConst {
     String OPI_COL_ID = "id";// id
     String OPI_COL_EMP = "employee_id"; // ご意見・ご要望を報告した従業員のid
     String OPI_COL_OPI_DATE = "opinion_date"; // ご意見・ご要望を頂戴した日付
-    String OPI_COL_OVERVIEW = "overview"; // ご意見・ご要望の概要
+    String OPI_COL_OVERVIEW = "overView"; // ご意見・ご要望の概要
     String OPI_COL_CONTENT = "content"; // ご意見・ご要望の内容
     String OPI_COL_CREATED_AT = "created_at"; // 登録日時
     String OPI_COL_UPDATED_AT = "updated_at"; // 更新日時

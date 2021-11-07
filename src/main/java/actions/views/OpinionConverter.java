@@ -16,7 +16,7 @@ public class OpinionConverter {
      * @param op OpinionViewのインスタンス
      * @return Opinionのインスタンス
      */
-    public static Opinion toModel(ReportView op) {
+    public static Opinion toModel(OpinionView op) {
         return new Opinion(
                 op.getId(),
                 EmployeeConverter.toModel(op.getEmployee()),
@@ -90,7 +90,7 @@ public class OpinionConverter {
      * @param op Viewモデル（コピー先）
      */
     public static void copyModelToView(Opinion o, OpinionView op) {
-        op.setId(op.getId());
+        op.setId(o.getId());
         op.setEmployee(EmployeeConverter.toView(o.getEmployee()));
         op.setOpinionDate(o.getOpinionDate());
         op.setOverView(o.getOverView());

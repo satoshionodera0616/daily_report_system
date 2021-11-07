@@ -6,7 +6,7 @@ import utils.DBUtil;
 
 /*
  * DB接続に関わる共通処理を行うクラス
- * 各Serviceクラスのスーパークラスとなるクラス。SQL実行に共通で必要となるEntityManagerインスタンスの作成やクローズ処理そ実装。
+ * 各Serviceクラスのスーパークラスとなるクラス。SQL実行に共通で必要となるEntityManagerインスタンスの作成やクローズ処理を実装。
  */
 public class ServiceBase {
 

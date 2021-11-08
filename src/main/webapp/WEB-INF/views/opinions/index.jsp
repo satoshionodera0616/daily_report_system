@@ -4,8 +4,8 @@
 <%@ page import="constants.ForwardConst" %>
 
 
-<c:set var="actOPI" value="${ForwardConst.ACT_OPI.getValue()}"/>
-<c:set var="commIdx" value="${FrowardConst.CMD_INDEX.getValue()}"/>
+<c:set var="actOpi" value="${ForwardConst.ACT_OPI.getValue()}"/>
+<c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}"/>
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}"/>
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}"/>
 
@@ -33,7 +33,7 @@
                         <td class="opinion_name"><c:out value="${opinion.employee.name}" /></td>
                         <td class="opinion_date"><fmt:formatDate value='${opinionDay }' pattern='yyyy-MM-dd' /></td>
                         <td class="opinion_overview">${opinion.overview}</td>
-                        <td class="opinion_action"><a href="<c:url value='?action=${actOPI}&command=${commShow}&id=${opinion.id}' />">詳細を見る</a></td>
+                        <td class="opinion_action"><a href="<c:url value='?action=${actOpi}&command=${commShow}&id=${opinion.id}' />">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -41,8 +41,8 @@
 
 
         <div id="pagination">
-            (全 ${opinion_count} 件) <br />
-            <c:forEach var="i" begin="1" end="${((opinion_count - 1) / maxRow) + 1}" step="1">
+            (全 ${opinions_count} 件) <br />
+            <c:forEach var="i" begin="1" end="${((opinions_count - 1) / maxRow) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;

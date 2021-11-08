@@ -1,6 +1,7 @@
 package actions;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -67,6 +68,31 @@ public class OpinionAction extends ActionBase{
 
         //一覧画面を表示する
         forward(ForwardConst.FW_OPI_INDEX);
+
+    }
+
+
+    /*
+     * 新規登録画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void entryNew() throws ServletException, IOException{
+
+
+        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+
+
+        //あらかじめご意見・ご要望情報の空インスタンスに、ご意見・ご要望を報告した日付＝今日の日付を設定しておく
+
+        OpinionView ov = new OpinionView();
+        ov.setOpinionDate(LocalDate.now());
+        putRequestScope(AttributeConst.OPINION, ov); //日付のみ設定済みのご意見・ご要望インスタンス
+
+
+        // 新規登録画面を表示
+        forward(ForwardConst.FW_OPI_NEW);
+
 
     }
 

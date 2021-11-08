@@ -96,6 +96,7 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
+
    //NEW! 全てのご意見・ご要望をidの降順に取得する
     String Q_OPI_GET_ALL = ENTITY_OPI + ".getAll";
     String Q_OPI_GET_ALL_DEF = "SELECT o FROM Opinion AS o ORDER BY o.id DESC";
@@ -104,8 +105,8 @@ public interface JpaConst {
     String Q_OPI_COUNT_DEF = "SELECT COUNT(o) FROM Opinion AS o";
     //NEW! 指定した従業員が作成したご意見・ご要望を全件idの降順で取得する
     String Q_OPI_GET_ALL_MINE = ENTITY_OPI + ".getAllMine";
-    String Q_OPI_GET_ALL_MINE_DEF = "SELECT o FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE + "ORDER BY o.id DESC";
-    //NEW! 指定した従業員が報告したご意見・ご要望の件数を取得する
+    String Q_OPI_GET_ALL_MINE_DEF = "SELECT o FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY o.id DESC";
+    //NEW! 指定した従業員が作成したご意見・ご要望の件数を取得する
     String Q_OPI_COUNT_ALL_MINE = ENTITY_OPI + ".countAllMine";
     String Q_OPI_COUNT_ALL_MINE_DEF = "SELECT COUNT(o) FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE;
 

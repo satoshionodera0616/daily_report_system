@@ -14,9 +14,9 @@
 
     </div>
 </c:if>
-<fmt:parseDate value="" pattern="yyyy-MM-dd" var="" type="date" />
-<label for="">ご意見を頂戴した日付</label><br />
-<input type="date" name="" value="<fmt:formatDate value='' pattern='yyyy-MM-dd' />" />
+<fmt:parseDate value="${opinion.opinionDate}" pattern="yyyy-MM-dd" var="opinionDay" type="date" />
+<label for="${AttributeConst.OPI_DATE.getValue()}">ご意見を頂戴した日付</label><br />
+<input type="date" name="${AttributeConst.OPI_DATE.getValue()}" value="<fmt:formatDate value='${opinionDay}' pattern='yyyy-MM-dd' />" />
 <br /><br />
 
 
@@ -24,14 +24,14 @@
 <c:out value="${sessionScope.login_employee.name}" />
 <br /><br />
 
-<label for="">概要</label><br />
-<input type="text" name="" value="" />
+<label for="${AttributeConst.OPI_OVERVIEW.getValue()}">概要</label><br />
+<input type="text" name="${AttributeConst.OPI_OVERVIEW.getValue()}" value="${opinion.overView}" />
 <br /><br />
 
 
-<label for="">内容</label><br />
-<textarea name="" rows="10" cols="50"></textarea>
+<label for="${AttributeConst.OPI_CONTENT.getValue()}">内容</label><br />
+<textarea name="${AttributeConst.OPI_CONTENT.getValue()}" rows="10" cols="50">${opinion.content}</textarea>
 <br /><br />
-<input type="hidden" name="" value="" />
+<input type="hidden" name="${AttributeConst.OPI_ID.getValue()}" value="${opinion.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
 <button type="submit">投稿</button>

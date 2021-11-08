@@ -65,7 +65,7 @@ public enum AttributeConst {
     // ご意見・ご要望管理
     OPINION("opinion"),
     OPINIONS("opinions"),
-    OPI_COUNT("opinion_count"),
+    OPI_COUNT("opinions_count"),
     OPI_ID("id"),
     OPI_DATE("opinion_date"),
     OPI_OVERVIEW("overView"),

@@ -54,7 +54,7 @@ public class OpinionService extends ServiceBase {
      */
     public List<OpinionView> getAllPerPage(int page){
 
-        List<Opinion> opinions = em.createNamedQuery(JpaConst.Q_REP_GET_ALL, Opinion.class)
+        List<Opinion> opinions = em.createNamedQuery(JpaConst.Q_OPI_GET_ALL, Opinion.class)
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();
@@ -66,9 +66,9 @@ public class OpinionService extends ServiceBase {
      * @return データの件数
      */
     public long countAll() {
-        long opinion_count = (long) em.createNamedQuery(JpaConst.Q_OPI_COUNT, Long.class)
+        long opinions_count = (long) em.createNamedQuery(JpaConst.Q_OPI_COUNT, Long.class)
                 .getSingleResult();
-        return opinion_count;
+        return opinions_count;
     }
 
     /*

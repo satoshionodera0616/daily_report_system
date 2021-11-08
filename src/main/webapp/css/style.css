@@ -170,3 +170,26 @@ pre{
 h3 {
     font-size: larger;
 }
+
+
+
+table#opinion_list th{
+    font-weight:hold;
+    padding: 10px 2%;
+}
+
+table#opinion_list .opinion_name{
+    width: 20%;
+    padding: 10px 2%;
+}
+table#opinion_list .opinion_date{
+    width: 20%;
+}
+
+table#opinion_list .opinion_overview{
+    width: 37%;
+}
+
+table#opinion_list .opinion_action{
+    width: 13%;
+}

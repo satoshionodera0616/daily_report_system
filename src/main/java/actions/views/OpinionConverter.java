@@ -6,7 +6,7 @@ import java.util.List;
 import models.Opinion;
 
 /*
- * 日報データのDTOモデル⇔Viewモデルの変換を行うクラス
+ * ご意見・ご要望データのDTOモデル⇔Viewモデルの変換を行うクラス
  */
 
 public class OpinionConverter {

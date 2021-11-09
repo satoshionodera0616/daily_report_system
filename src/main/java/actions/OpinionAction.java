@@ -47,14 +47,14 @@ public class OpinionAction extends ActionBase{
 
         //指定されたページ数の一覧画面に表示するご意見・ご要望データを取得
         int page = getPage();
-        List<OpinionView> opinions= service.getAllPerPage(page);
+        List<OpinionView> opinions = service.getAllPerPage(page);
 
 
         //全ご意見・ご要望データの件数を取得
         long opinionsCount = service.countAll();
 
 
-        putRequestScope(AttributeConst.OPINION, opinions); //取得したご意見・ご要望データ
+        putRequestScope(AttributeConst.OPINIONS, opinions); //取得したご意見・ご要望データ
         putRequestScope(AttributeConst.OPI_COUNT, opinionsCount); //全てのご意見・ご要望データの件数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数

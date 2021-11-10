@@ -163,4 +163,31 @@ public class OpinionAction extends ActionBase{
         }
     }
 
+
+    /*
+     * 詳細画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void show() throws ServletException, IOException{
+
+
+        //idを条件にご意見・ご要望データを取得する
+        OpinionView ov = service.findOne(toNumber(getRequestParam(AttributeConst.OPI_ID)));
+
+        if(ov == null) {
+            //該当のご意見・ご要望データが存在しない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+        }else {
+
+
+            putRequestScope(AttributeConst.OPINION, ov);//取得したご意見・ご要望データ
+
+
+            //詳細画面を表示
+            forward(ForwardConst.FW_OPI_SHOW);
+        }
+    }
+
 }

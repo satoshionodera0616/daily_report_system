@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="constants.ForwardConst" %>
 
-<c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
+<c:set var="actOpi" value="${ForwardConst.ACT_OPI.getValue()}" />
 <c:set var="commUpd" value="${ForwardConst.CMD_UPDATE.getValue()}" />
 
 
@@ -11,13 +11,13 @@
 
 
         <h2>ご意見・ご要望 編集ページ</h2>
-        <form method="" action="<c:url value='?action= &command= ' />">
+        <form method="POST" action="<c:url value='?action=${actOpi}&command=${commUpd}' />">
             <c:import url="_form.jsp" />
         </form>
 
 
         <p>
-            <a href="<c:url value='' />">一覧に戻る</a>
+            <a href="<c:url value='?action=Opinion&command=index' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

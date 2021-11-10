@@ -102,4 +102,10 @@ public class Opinion {
     @Column(name = JpaConst.OPI_COL_UPDATED_AT, nullable = false)
     private LocalDateTime updatedAt;
 
+    /*
+     * 削除された報告かどうか（現存：0、削除済み：1）
+     */
+    @Column(name = JpaConst.OPI_COL_DELETE_FLAG, nullable = false)
+    private Integer deleteFlag;
+
 }

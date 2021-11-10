@@ -3,6 +3,8 @@ package actions.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.AttributeConst;
+import constants.JpaConst;
 import models.Opinion;
 
 /*
@@ -24,7 +26,12 @@ public class OpinionConverter {
                 op.getOverView(),
                 op.getContent(),
                 op.getCreatedAt(),
-                op.getUpdatedAt());
+                op.getUpdatedAt(),
+                op.getDeleteFlag() == null
+                        ? null
+                        : op.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
+                                ?JpaConst.OPI_DEL_TRUE
+                                :JpaConst.OPI_DEL_FALSE);
     }
 
     /*
@@ -47,7 +54,12 @@ public class OpinionConverter {
                 o.getOverView(),
                 o.getContent(),
                 o.getCreatedAt(),
-                o.getUpdatedAt());
+                o.getUpdatedAt(),
+                o.getDeleteFlag() == null
+                        ? null
+                        : o.getDeleteFlag() == JpaConst.OPI_DEL_TRUE
+                                ? AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
+                                : AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
     }
 
 
@@ -81,6 +93,7 @@ public class OpinionConverter {
         o.setContent(op.getContent());
         o.setCreatedAt(op.getCreatedAt());
         o.setUpdatedAt(op.getUpdatedAt());
+        o.setDeleteFlag(op.getDeleteFlag());
     }
 
 
@@ -97,6 +110,7 @@ public class OpinionConverter {
         op.setContent(o.getContent());
         op.setCreatedAt(o.getCreatedAt());
         op.setUpdatedAt(o.getUpdatedAt());
+        op.setDeleteFlag(o.getDeleteFlag());
 
     }
 

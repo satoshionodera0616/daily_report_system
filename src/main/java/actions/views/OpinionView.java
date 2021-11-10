@@ -61,4 +61,11 @@ public class OpinionView {
      */
     private LocalDateTime updatedAt;
 
+
+    /*
+     * 削除された報告かどうか（現存：0、削除済み：1）
+     */
+    private Integer deleteFlag;
+
+
 }

@@ -132,7 +132,8 @@ public class OpinionAction extends ActionBase{
                     getRequestParam(AttributeConst.OPI_OVERVIEW),
                     getRequestParam(AttributeConst.OPI_CONTENT),
                     null,
-                    null);
+                    null,
+                    AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
 
 
             //ご意見・ご要望情報登録
@@ -175,8 +176,9 @@ public class OpinionAction extends ActionBase{
         //idを条件にご意見・ご要望データを取得する
         OpinionView ov = service.findOne(toNumber(getRequestParam(AttributeConst.OPI_ID)));
 
-        if(ov == null) {
-            //該当のご意見・ご要望データが存在しない場合はエラー画面を表示
+        if(ov == null || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
+
+            //該当のご意見・ご要望データが存在しない、または倫理削除されている場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
         }else {
@@ -204,9 +206,10 @@ public class OpinionAction extends ActionBase{
         //セッションからログイン中の従業員情報を取得
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
-        if(ov == null || ev.getId() != ov.getEmployee().getId()) {
+        if(ov == null || ev.getId() != ov.getEmployee().getId() || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
             //該当のご意見・ご要望データが存在しない、または
-            //ログインしている従業員がご意見・ご要望の報告者でない場合はエラー画面を表示
+            //ログインしている従業員がご意見・ご要望の報告者でない、または
+            //倫理削除されている場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
         }else {
@@ -265,5 +268,10 @@ public class OpinionAction extends ActionBase{
 
         }
     }
+
+
+    /*
+     * 倫理削除を行う
+     */
 
 }

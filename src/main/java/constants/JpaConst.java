@@ -58,7 +58,7 @@ public interface JpaConst {
     String OPI_COL_CONTENT = "content"; // ご意見・ご要望の内容
     String OPI_COL_CREATED_AT = "created_at"; // 登録日時
     String OPI_COL_UPDATED_AT = "updated_at"; // 更新日時
-    String OPI_COL_DELETE_FLAG = "deleted_flag"; // 削除フラグ
+    String OPI_COL_DELETE_FLAG = "delete_flag"; // 削除フラグ
 
 
     int OPI_DEL_TRUE = 1;//削除フラグON(削除済み)

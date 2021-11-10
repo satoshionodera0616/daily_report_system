@@ -124,6 +124,32 @@ public class OpinionService extends ServiceBase {
     }
 
     /*
+     * idを条件にご意見・ご要望データを倫理削除する
+     * @param id
+     */
+    public void destroy(Integer id) {
+
+
+        //idを条件に登録済みのご意見・ご要望情報を取得する
+        OpinionView savedOpi = findOne(id);
+
+
+        //更新日時に現在時刻を設定する
+        LocalDateTime today = LocalDateTime.now();
+        savedOpi.setUpdatedAt(today);
+
+
+        //倫理削除フラグをたてる
+        savedOpi.setDeleteFlag(JpaConst.OPI_DEL_TRUE);
+
+
+        //更新処理を行う
+        update(savedOpi);
+
+    }
+
+
+    /*
      * idを条件にデータを1件取得する
      * @param id
      * @return 取得データのインスタンス

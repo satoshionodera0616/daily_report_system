@@ -25,7 +25,7 @@
                     <th class="opinion_overview">概要</th>
                     <th class="opinion_action">操作</th>
                 </tr>
-                <c:forEach var="opinion" items="${opinions}" varStatus="status">
+               <c:forEach var="opinion" items="${opinions}" varStatus="status">
                     <fmt:parseDate value="${opinion.opinionDate}" pattern="yyyy-MM-dd" var="opinionDay" type="date" /> <%--文字列を日付データに変換 --%>
 
 
@@ -33,9 +33,19 @@
                     <td class="opinion_name"><c:out value="${opinion.employee.name}" /></td>
                     <td class="opinion_date"><fmt:formatDate value='${opinionDay}' pattern='yyyy-MM-dd' /></td>
                     <td class="opinion_overview">${opinion.overView}</td>
-                    <td class="opinion_action"><a href="<c:url value='?action=${actOpi}&command=${commShow}&id=${opinion.id}' />">詳細を見る</a></td>
+                    <td class="opinion_action">
+                        <c:choose>
+                            <c:when test="${opinion.deleteFlag == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()}">
+                                （削除済み）
+                            </c:when>
+                            <c:otherwise>
+                                <a href="<c:url value='?action=${actOpi}&command=${commShow}&id=${opinion.id}' />">詳細を見る</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+
                 </tr>
-                </c:forEach>
+               </c:forEach>
             </tbody>
         </table>
 

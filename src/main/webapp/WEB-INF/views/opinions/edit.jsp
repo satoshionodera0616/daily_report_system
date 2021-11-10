@@ -17,6 +17,22 @@
 
 
         <p>
+            <a href="#" onclick="confirmDestroy();">この報告を削除する</a>
+        </p>
+        <form method="POST" action="<c:url value='?action=${action}&command=${commDel}' />">
+            <input type="hidden" name="${AttributeConst.OPI_ID.getValue()}" value="${opinion.id}" />
+            <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
+        </form>
+        <script>
+            function confirmDestroy(){
+                if(confirm("本当に削除してよろしいですか？")){
+                    document.forms[1].submit();
+                }
+            }
+        </script>
+
+
+        <p>
             <a href="<c:url value='?action=Opinion&command=index' />">一覧に戻る</a>
         </p>
     </c:param>

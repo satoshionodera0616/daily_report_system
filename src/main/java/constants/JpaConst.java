@@ -65,10 +65,19 @@ public interface JpaConst {
     int OPI_DEL_FALSE = 0;//削除フラグOFF(現存)
 
 
+    //コメントテーブル
+    String TABLE_COM = "comments";
+    //コメントテーブルカラム
+    String COM_COL_ID = "id";
+    String COM_COL_EMP = "employee_id";
+    String COM_COL_CONTENT = "content";
+
+
     // Entity名
     String ENTITY_EMP = "employee";//従業員
     String ENTITY_REP = "report";//日報
     String ENTITY_OPI = "opinion"; // ご意見・ご要望
+    String ENTITY_COM = "comment";
 
     // JPQL内パラメータ
     String JPQL_PARM_CODE = "code";//社員番号
@@ -116,4 +125,8 @@ public interface JpaConst {
     String Q_OPI_COUNT_ALL_MINE = ENTITY_OPI + ".countAllMine";
     String Q_OPI_COUNT_ALL_MINE_DEF = "SELECT COUNT(o) FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE;
 
+    // 全てのコメントをidの降順に取得する
+    // 全てのコメントの件数を取得する
+    // 指定した従業員が作成したコメントを全件idの降順で取得する
+    // 指定した従業員が作成したコメントの件数を取得する
 }

@@ -209,7 +209,7 @@ public class OpinionAction extends ActionBase{
         if(ov == null || ev.getId() != ov.getEmployee().getId() || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
             //該当のご意見・ご要望データが存在しない、または
             //ログインしている従業員がご意見・ご要望の報告者でない、または
-            //倫理削除されている場合はエラー画面を表示
+            //ご意見・ご要望が倫理削除されている場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
         }else {
@@ -287,7 +287,7 @@ public class OpinionAction extends ActionBase{
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
             //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_OPI, ForwardConst.CMD_INDEX);
+            redirect(ForwardConst.ACT_OPI,ForwardConst.CMD_INDEX);
         }
     }
 }

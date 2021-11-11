@@ -4,6 +4,7 @@
 
 <c:set var="actOpi" value="${ForwardConst.ACT_OPI.getValue()}" />
 <c:set var="commUpd" value="${ForwardConst.CMD_UPDATE.getValue()}" />
+<c:set var="commDel" value="${ForwardConst.CMD_DESTROY.getValue()}" />
 
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -19,7 +20,7 @@
         <p>
             <a href="#" onclick="confirmDestroy();">この報告を削除する</a>
         </p>
-        <form method="POST" action="<c:url value='?action=${action}&command=${commDel}' />">
+        <form method="POST" action="<c:url value='?action=${actOpi}&command=${commDel}' />">
             <input type="hidden" name="${AttributeConst.OPI_ID.getValue()}" value="${opinion.id}" />
             <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
         </form>

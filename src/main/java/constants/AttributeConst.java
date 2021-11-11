@@ -69,7 +69,15 @@ public enum AttributeConst {
     OPI_ID("id"),
     OPI_DATE("opinion_date"),
     OPI_OVERVIEW("overView"),
-    OPI_CONTENT("content");
+    OPI_CONTENT("content"),
+
+
+    // コメント管理
+    COMMENT("comment"),
+    COMMENTS("comments"),
+    COM_COUNT("comments_count"),
+    COM_ID("id"),
+    COM_CONTENT("content");
 
 
     private final String text;

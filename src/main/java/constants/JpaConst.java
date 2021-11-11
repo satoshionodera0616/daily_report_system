@@ -126,7 +126,15 @@ public interface JpaConst {
     String Q_OPI_COUNT_ALL_MINE_DEF = "SELECT COUNT(o) FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE;
 
     // 全てのコメントをidの降順に取得する
+    String Q_COM_GET_ALL = ENTITY_COM + ".getAll";
+    String Q_COM_GET_ALL_DEF = "SELECT c FROM Comment AS c ORDER BY c.id DESC";
     // 全てのコメントの件数を取得する
+    String Q_COM_COUNT = ENTITY_COM + ".count";
+    String Q_COM_COUNT_DEF = "SELECT COUNT(c) FROM Comment AS c";
     // 指定した従業員が作成したコメントを全件idの降順で取得する
+    String Q_COM_GET_ALL_MINE = ENTITY_COM +".getAllMine";
+    String Q_COM_GET_ALL_MINE_DEF = "SELECT c FROM Comment AS c WHERE c.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY c.id DESC";
     // 指定した従業員が作成したコメントの件数を取得する
+    String Q_COM_COUNT_ALL_MINE = ENTITY_COM + ".countAllMine";
+    String Q_COM_COUNT_ALL_MINE_DEF = "SELECT COUNT(c) FROM Comment AS c WHERE c.employee = :" + JPQL_PARM_EMPLOYEE;
 }

@@ -45,7 +45,7 @@ public class CommentConverter {
     public static List<CommentView> toViewList(List<Comment> list){
         List<CommentView> cvs = new ArrayList<>();
 
-        for(Comment c :list) {
+        for(Comment c : list) {
             cvs.add(toView(c));
         }
 

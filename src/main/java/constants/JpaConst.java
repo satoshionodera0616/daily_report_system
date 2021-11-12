@@ -112,7 +112,7 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
-   //以下オリジナル 全てのご意見・ご要望をidの降順に取得する
+   // 全てのご意見・ご要望をidの降順に取得する
     String Q_OPI_GET_ALL = ENTITY_OPI + ".getAll";
     String Q_OPI_GET_ALL_DEF = "SELECT o FROM Opinion AS o ORDER BY o.id DESC";
     // 全てのご意見・ご要望の件数を取得する
@@ -125,9 +125,9 @@ public interface JpaConst {
     String Q_OPI_COUNT_ALL_MINE = ENTITY_OPI + ".countAllMine";
     String Q_OPI_COUNT_ALL_MINE_DEF = "SELECT COUNT(o) FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE;
 
-    // 全てのコメントをidの降順に取得する
-    String Q_COM_GET_ALL = ENTITY_COM + ".getAll";
-    String Q_COM_GET_ALL_DEF = "SELECT c FROM Comment AS c ORDER BY c.id DESC";
+   // 全てのコメントと、対象となる報告をidの降順に取得する
+    String Q_COM_OPI_GET_ALL = ENTITY_COM + ENTITY_OPI + ".getAll";
+    String Q_COM_OPI_GET_ALL_DEF = "SELECT c FROM Comment AS c ORDER BY c.id DESC";
     // 全てのコメントの件数を取得する
     String Q_COM_COUNT = ENTITY_COM + ".count";
     String Q_COM_COUNT_DEF = "SELECT COUNT(c) FROM Comment AS c";

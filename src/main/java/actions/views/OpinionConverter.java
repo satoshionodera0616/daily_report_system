@@ -18,18 +18,18 @@ public class OpinionConverter {
      * @param op OpinionViewのインスタンス
      * @return Opinionのインスタンス
      */
-    public static Opinion toModel(OpinionView op) {
+    public static Opinion toModel(OpinionView ov) {
         return new Opinion(
-                op.getId(),
-                EmployeeConverter.toModel(op.getEmployee()),
-                op.getOpinionDate(),
-                op.getOverView(),
-                op.getContent(),
-                op.getCreatedAt(),
-                op.getUpdatedAt(),
-                op.getDeleteFlag() == null
+                ov.getId(),
+                EmployeeConverter.toModel(ov.getEmployee()),
+                ov.getOpinionDate(),
+                ov.getOverView(),
+                ov.getContent(),
+                ov.getCreatedAt(),
+                ov.getUpdatedAt(),
+                ov.getDeleteFlag() == null
                         ? null
-                        : op.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
+                        : ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
                                 ?JpaConst.OPI_DEL_TRUE
                                 :JpaConst.OPI_DEL_FALSE);
     }
@@ -85,15 +85,15 @@ public class OpinionConverter {
      * @param o DTOモデル（コピー先）
      * @param op Viewモデル（コピー元）
      */
-    public static void copyViewToModel(Opinion o, OpinionView op) {
-        o.setId(op.getId());
-        o.setEmployee(EmployeeConverter.toModel(op.getEmployee()));
-        o.setOpinionDate(op.getOpinionDate());
-        o.setOverView(op.getOverView());
-        o.setContent(op.getContent());
-        o.setCreatedAt(op.getCreatedAt());
-        o.setUpdatedAt(op.getUpdatedAt());
-        o.setDeleteFlag(op.getDeleteFlag());
+    public static void copyViewToModel(Opinion o, OpinionView ov) {
+        o.setId(ov.getId());
+        o.setEmployee(EmployeeConverter.toModel(ov.getEmployee()));
+        o.setOpinionDate(ov.getOpinionDate());
+        o.setOverView(ov.getOverView());
+        o.setContent(ov.getContent());
+        o.setCreatedAt(ov.getCreatedAt());
+        o.setUpdatedAt(ov.getUpdatedAt());
+        o.setDeleteFlag(ov.getDeleteFlag());
     }
 
 
@@ -102,15 +102,15 @@ public class OpinionConverter {
      * @param o DTOモデル（コピー元）
      * @param op Viewモデル（コピー先）
      */
-    public static void copyModelToView(Opinion o, OpinionView op) {
-        op.setId(o.getId());
-        op.setEmployee(EmployeeConverter.toView(o.getEmployee()));
-        op.setOpinionDate(o.getOpinionDate());
-        op.setOverView(o.getOverView());
-        op.setContent(o.getContent());
-        op.setCreatedAt(o.getCreatedAt());
-        op.setUpdatedAt(o.getUpdatedAt());
-        op.setDeleteFlag(o.getDeleteFlag());
+    public static void copyModelToView(Opinion o, OpinionView ov) {
+        ov.setId(o.getId());
+        ov.setEmployee(EmployeeConverter.toView(o.getEmployee()));
+        ov.setOpinionDate(o.getOpinionDate());
+        ov.setOverView(o.getOverView());
+        ov.setContent(o.getContent());
+        ov.setCreatedAt(o.getCreatedAt());
+        ov.setUpdatedAt(o.getUpdatedAt());
+        ov.setDeleteFlag(o.getDeleteFlag());
 
     }
 

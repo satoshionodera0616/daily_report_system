@@ -207,9 +207,13 @@ public class OpinionAction extends ActionBase{
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
         if(ov == null || ev.getId() != ov.getEmployee().getId() || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
-            //該当のご意見・ご要望データが存在しない、または
-            //ログインしている従業員がご意見・ご要望の報告者でない、または
-            //ご意見・ご要望が倫理削除されている場合はエラー画面を表示
+            System.out.println("編集画面の条件チェックを通過しました！");
+            /*
+             * 該当のご意見・ご要望データが存在しない、または
+             * ログインしている従業員がご意見・ご要望の報告者でない、または
+             * 倫理削除が行われた報告の場合はエラー画面を表示
+             */
+
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
         }else {
@@ -276,13 +280,13 @@ public class OpinionAction extends ActionBase{
      * @throws IOException
      */
     public void destroy() throws ServletException, IOException {
-
+        System.out.println("destroy()に入りました！");
         //CSRF対策 tokenのチェック
         if (checkToken()) {
-
+            System.out.println("checkToken()を通過しました！");
             //idを条件にご意見・ご要望データを論理削除する
             service.destroy(toNumber(getRequestParam(AttributeConst.OPI_ID)));
-
+            System.out.println("destroy()を通過しました！");
             //セッションに削除完了のフラッシュメッセージを設定
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 

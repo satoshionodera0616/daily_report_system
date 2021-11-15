@@ -70,7 +70,10 @@ public interface JpaConst {
     //コメントテーブルカラム
     String COM_COL_ID = "id";
     String COM_COL_EMP = "employee_id";
+    String COM_COL_OPI = "opinion_id";
     String COM_COL_CONTENT = "content";
+    String COM_COL_CREATED_AT = "created_at";
+    String COM_COL_UPDATED_AT = "updated_at";
 
 
     // Entity名
@@ -78,6 +81,7 @@ public interface JpaConst {
     String ENTITY_REP = "report";//日報
     String ENTITY_OPI = "opinion"; // ご意見・ご要望
     String ENTITY_COM = "comment";
+
 
     // JPQL内パラメータ
     String JPQL_PARM_CODE = "code";//社員番号
@@ -125,9 +129,9 @@ public interface JpaConst {
     String Q_OPI_COUNT_ALL_MINE = ENTITY_OPI + ".countAllMine";
     String Q_OPI_COUNT_ALL_MINE_DEF = "SELECT COUNT(o) FROM Opinion AS o WHERE o.employee = :" + JPQL_PARM_EMPLOYEE;
 
-   // 全てのコメントと、対象となる報告をidの降順に取得する
-    String Q_COM_OPI_GET_ALL = ENTITY_COM + ENTITY_OPI + ".getAll";
-    String Q_COM_OPI_GET_ALL_DEF = "SELECT c FROM Comment AS c ORDER BY c.id DESC";
+   // 全てのコメントをidの降順に取得する
+    String Q_COM_GET_ALL = ENTITY_COM + ".getAll";
+    String Q_COM_GET_ALL_DEF = "SELECT c FROM Comment AS c ORDER BY c.id DESC";
     // 全てのコメントの件数を取得する
     String Q_COM_COUNT = ENTITY_COM + ".count";
     String Q_COM_COUNT_DEF = "SELECT COUNT(c) FROM Comment AS c";

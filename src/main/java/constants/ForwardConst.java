@@ -14,6 +14,7 @@ public enum ForwardConst {
     ACT_EMP("Employee"),
     ACT_REP("Report"),
     ACT_OPI("Opinion"),
+    ACT_COM("Comment"),
     ACT_AUTH("Auth"),
 
 
@@ -36,18 +37,26 @@ public enum ForwardConst {
     FW_ERR_UNKNOWN("error/unknown"),
     FW_TOP_INDEX("topPage/index"),
     FW_LOGIN("login/login"),
+
     FW_EMP_INDEX("employees/index"),
     FW_EMP_SHOW("employees/show"),
     FW_EMP_NEW("employees/new"),
     FW_EMP_EDIT("employees/edit"),
+
     FW_REP_INDEX("reports/index"),
     FW_REP_SHOW("reports/show"),
     FW_REP_NEW("reports/new"),
     FW_REP_EDIT("reports/edit"),
+
     FW_OPI_INDEX("opinions/index"),
     FW_OPI_SHOW("opinions/show"),
     FW_OPI_NEW("opinions/new"),
-    FW_OPI_EDIT("opinions/edit");
+    FW_OPI_EDIT("opinions/edit"),
+
+    FW_COM_INDEX("comments/index"),
+    FW_COM_SHOW("comments/show"),
+    FW_COM_NEW("comments/new"),
+    FW_COM_EDIT("comments/edit");
 
 
 

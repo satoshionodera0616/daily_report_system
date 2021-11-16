@@ -3,27 +3,19 @@
 <%@ page import="constants.ForwardConst" %>
 
 
-<c:set var="actCOM" value="${ForwardConst.ACT_COM.getValue()}" />
+<c:set var="action" value="${ForwardConst.ACT_OPI.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>コメント 記入ページ</h2>
-            <table id="opinion_list" >
-                <tr><th class="opinion_name_comment_new">報告者</th><td> </td></tr>
-                <tr><th class="opinion_date_comment_new">ご意見を頂戴した日付</th><td> </td></tr>
-                <tr><th class="opinion_overview_comment_new">概要<th><td> </td></tr>
-                <tr><th class="opinion_content_comment_new">内容<th><td> </td></tr>
-                <tr><th class="opinion_createdat_comment_new">登録日時<th><td> </td></tr>
-                <tr><th class="opinion_updatedat_comment_new">更新日時<th><td> </td></tr>
-            </table>
+        <h2>ご意見・ご要望 報告ページ</h2>
 
 
-        <form method="POST" action="<c:url value='?action=${actCOM}&command=${commCrt}' />">
+        <form method="POST" action="<c:url value='?action=${action}&command=${commCrt}' />">
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a href="<c:url value='?action=${actCOM}&command=${commIdx}' />">一覧に戻る</a></p>
+        <p><a href="<c:url value='?action=${action}&command=${commIdx}' />">一覧に戻る</a></p>
     </c:param>
 </c:import>

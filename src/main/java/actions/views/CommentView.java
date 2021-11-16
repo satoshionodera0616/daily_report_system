@@ -1,5 +1,7 @@
 package actions.views;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,12 @@ public class CommentView {
 
     private EmployeeView employee;
 
+    private OpinionView opinion;
+
     private String content;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 
 }

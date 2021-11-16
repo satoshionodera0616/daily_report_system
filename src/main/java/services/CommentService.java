@@ -6,20 +6,27 @@ import actions.views.CommentConverter;
 import actions.views.CommentView;
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
+import actions.views.OpinionConverter;
+import actions.views.OpinionView;
 import constants.JpaConst;
 import models.validators.CommentValidator;
+
+
+/*
+ * テーブルの操作関連
+ */
 
 public class CommentService extends ServiceBase {
 
     /*
-     * 指定した従業員が作成したコメントを、指定されたページ数の一覧画面に表示する分取得しCommentViewのリストで返却する
+     * 指定した従業員が作成したコメントと、コメントの対象となる報告を、指定されたページ数の一覧画面に表示する分取得しCommentViewのリストで返却する
      * @param employee 従業員
      * @param page ページ数
      * @return 一覧画面に表示するデータのリスト
      */
     public List<CommentView> getMinePerPage(EmployeeView employee, int page){
 
-        List<models.Comment> comments = em.createNamedQuery(JpaConst.Q_COM_GET_ALL_MINE, models.Comment.class)
+        List<models.Comment> comments = em.createNamedQuery(JpaConst.Q_COM_GET_ALL_MINE,  models.Comment.class)
                 .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
@@ -80,6 +87,15 @@ public class CommentService extends ServiceBase {
     }
 
     /*
+     *idを条件に取得したデータをOpinionViewのインスタンスで返却する
+     *@param id
+     *@return 取得データのインスタンス
+     */
+    public OpinionView findOne2(int id) {
+        return OpinionConverter.toView(findOneInternal2(id));
+    }
+
+    /*
      * 画面から入力されたコメントの登録内容を元にデータを1件作成し、コメントテーブルに登録する
      * @param cv コメントの登録内容
      * @return バリデーションで発生したエラーのリスト
@@ -114,12 +130,21 @@ public class CommentService extends ServiceBase {
     }
 
     /*
-     * idを条件にデータを1件取得する
+     * idを条件にデータを1件取得する（コメント情報）
      * @param id
      * @return 取得データのインスタンス
      */
     private models.Comment findOneInternal(int id) {
         return em.find(models.Comment.class, id);
+    }
+
+    /*
+     * idを条件にデータを1件取得する（ご意見・ご要望情報）
+     * @param id
+     * @return 取得データのインスタンス
+     */
+    private models.Opinion findOneInternal2(int id){
+        return em.find(models.Opinion.class, id);
     }
 
     /*
@@ -149,4 +174,6 @@ public class CommentService extends ServiceBase {
 
 
     }
+
+
 }

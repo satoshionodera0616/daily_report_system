@@ -80,6 +80,7 @@ public enum AttributeConst {
     COM_CONTENT("content");
 
 
+
     private final String text;
     private final Integer i;
 

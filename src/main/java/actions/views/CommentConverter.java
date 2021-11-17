@@ -18,8 +18,8 @@ public class CommentConverter {
                 EmployeeConverter.toModel(cv.getEmployee()),
                 OpinionConverter.toModel(cv.getOpinion()),
                 cv.getContent(),
-                null,
-                null);
+                cv.getCreatedAt(),
+                cv.getUpdatedAt());
 
     }
 
@@ -29,8 +29,9 @@ public class CommentConverter {
      * @return CommentViewのインスタンス
      */
     public static CommentView toView(Comment c) {
-
+System.out.println("CommentConverterのtoView()に入りました！");
         if(c == null) {
+System.out.println("cはNULLです！");
             return null;
         }
 
@@ -41,6 +42,7 @@ public class CommentConverter {
                 c.getContent(),
                 null,
                 null);
+
     }
 
     /*

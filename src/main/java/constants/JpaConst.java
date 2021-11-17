@@ -88,6 +88,9 @@ public interface JpaConst {
     String JPQL_PARM_PASSWORD = "password";//パスワード
     String JPQL_PARM_EMPLOYEE = "employee";//従業員
 
+    // 仮で作成-------------------------------------------------------------
+    String JPQL_PARM_ID = "id";
+    // ---------------------------------------------------------------------
 
     // NamedQueryの nameとquery
     // 全ての従業員をidの降順に取得する
@@ -141,4 +144,8 @@ public interface JpaConst {
     // 指定した従業員が作成したコメントの件数を取得する
     String Q_COM_COUNT_ALL_MINE = ENTITY_COM + ".countAllMine";
     String Q_COM_COUNT_ALL_MINE_DEF = "SELECT COUNT(c) FROM Comment AS c WHERE c.employee = :" + JPQL_PARM_EMPLOYEE;
+
+    // opinion_idカラムの値がリクエストidの値と同じなコメントをidの降順に取得する----------------------------------------------------------------------------------仮で作成
+    String Q_COM_GET_REQUEST_ALL = ENTITY_COM + ".getAllOpinionComment";
+    String Q_COM_GET_REQUEST_ALL_DEF = "SELECT c FROM Comment AS c WHERE c.opinion = :" + COM_COL_OPI + " ORDER BY c.id DESC";
 }

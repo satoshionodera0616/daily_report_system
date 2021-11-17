@@ -3,11 +3,14 @@ package services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import actions.views.CommentConverter;
+import actions.views.CommentView;
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
 import actions.views.OpinionConverter;
 import actions.views.OpinionView;
 import constants.JpaConst;
+import models.Comment;
 import models.Opinion;
 import models.validators.OpinionValidator;
 
@@ -79,6 +82,15 @@ public class OpinionService extends ServiceBase {
     public OpinionView findOne(int id) {
         return OpinionConverter.toView(findOneInternal(id));
 
+    }
+
+    /**------------------------------------------------------------------
+     * idを条件に取得したデータをCommentViewのインスタンスで返却する
+     * @param id
+     * @return 取得データのインスタンス
+     */
+    public List<CommentView> findOne2(Opinion id) {
+        return CommentConverter.toViewList(findOneInternal2(id));
     }
 
     /*
@@ -157,6 +169,23 @@ public class OpinionService extends ServiceBase {
     private Opinion findOneInternal(int id) {
         return em.find(Opinion.class, id);
     }
+
+
+    /**--------------------------------------------------------find()→主キーでの検索しかできないので、NamedQueryを定義して使用する
+     * idを条件に該当するデータ（レコード内容）を全て取得する（コメント情報）
+     * @param id
+     * @return 取得データのインスタンス
+     */
+    private List<Comment> findOneInternal2(Opinion id) {
+System.out.println("findOneInternal2に入りました-----------------------------------------"+id);
+
+        List<Comment> opinion_comments = em.createNamedQuery(JpaConst.Q_COM_GET_REQUEST_ALL, models.Comment.class)
+                .setParameter(JpaConst.COM_COL_OPI, id)
+                .getResultList();
+System.out.println("createNamedQueryを抜けました------------------------------------------");
+        return opinion_comments;
+    }
+
 
     /*
      * ご意見・ご要望データを1件登録する

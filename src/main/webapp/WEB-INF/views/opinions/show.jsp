@@ -72,12 +72,11 @@
                 <c:forEach var="comment" items="${comments}" varStatus="status">
                     <tr class="row${status.count % 2}">
 
-
-                        <th><c:out value="${comment.employee.name}" /></th>
-                        <th>${comment.content}</th>
-                        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue() ||
-                        sessionScope.login_employee.id == comment.employee.id} ">
-                            <th><a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a></th>
+                        <td><c:out value="${comment.employee.name}" /></td>
+                        <td>${comment.content}</td>
+                        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()
+                            || sessionScope.login_employee.id == comment.employee.id} ">
+                            <td><a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a></td>
                         </c:if>
                     </tr>
                 </c:forEach>

@@ -30,22 +30,22 @@
                     <th class="comment_action">操作</th>
                 </tr>
                <c:forEach var="comment" items="${comments}" varStatus="status">
-                    <fmt:parseDate value="${comment.opinion.opinionDate}" pattern="yyyy-MM-dd" var="opinionDay" type="date" /> <%--文字列を日付データに変換 --%>
+                <fmt:parseDate value="${comment.opinion.opinionDate}" pattern="yyyy-MM-dd" var="opinionDay" type="date" /> <%--文字列を日付データに変換 --%>
 
 
-                <tr class="row${status.count % 2}">
+                <tr>
                     <td class="opinion_name"><c:out value="${comment.opinion.employee.name}" /></td>
                     <td class="opinion_date"><fmt:formatDate value='${opinionDay}' pattern='yyyy-MM-dd' /></td>
-                    <td class="opinion_overview">${comment.opinion.overView}</td>
+                    <td class="opinion_overview">${comment.opinion.overView}></td>
                     <td class="comment_name"><c:out value="${comment.employee.name}" /></td>
-                    <td class="comment_content" width=""><div style="">${comment.content}</div></td>
+                    <td class="comment_content">${comment.content}</td>
                     <td class="comment_action">
                         <c:choose>
                             <c:when test="${comment.opinion.deleteFlag == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()}">
                                 （報告が削除されています）
                             </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='?action=${actOpi}&command=${commShow}&id=${comment.opinion.id}' />">報告内容・コメントの詳細を見る</a>
+                                <a href=" <c:url value='?action=${actOpi}&command=${commShow}&id=${comment.opinion.id}' />">報告内容・コメントの詳細を見る</a>
                             </c:otherwise>
                         </c:choose>
                     </td>

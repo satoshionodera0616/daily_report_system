@@ -13,16 +13,17 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommentView {
 
-    private Integer id;
 
-    private EmployeeView employee;
+    private Integer id;  //id
 
-    private OpinionView opinion;
+    private EmployeeView employee;  //コメントを作成した従業員
 
-    private String content;
+    private OpinionView opinion;  //コメントをつけたご意見・ご要望の報告
 
-    private LocalDateTime createdAt;
+    private String content;  //コメントの内容
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;  //登録日時
+
+    private LocalDateTime updatedAt;  //更新日時
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import actions.views.CommentView;
 import actions.views.EmployeeView;
 import actions.views.OpinionView;
 import constants.AttributeConst;
@@ -18,7 +19,7 @@ import services.OpinionService;
  * ご意見・ご要望に関する処理を行うActionクラス
  */
 
-public class OpinionAction extends ActionBase{
+public class OpinionAction extends ActionBase  {
 
     private OpinionService service;
 
@@ -176,6 +177,9 @@ public class OpinionAction extends ActionBase{
         //idを条件にご意見・ご要望データを取得する
         OpinionView ov = service.findOne(toNumber(getRequestParam(AttributeConst.OPI_ID)));
 
+        //取得したidとopinion_idカラムの値が同じなコメントデータを取得する
+        List<CommentView> comments = service.findOne2(toNumber2(getRequestParam(AttributeConst.OPI_ID)));
+
         if(ov == null || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
             //該当のご意見・ご要望データが存在しない、または倫理削除されている場合はエラー画面を表示
@@ -185,6 +189,7 @@ public class OpinionAction extends ActionBase{
 
 
             putRequestScope(AttributeConst.OPINION, ov);//取得したご意見・ご要望データ
+            putRequestScope(AttributeConst.COMMENTS, comments);//取得したコメントリスト
 
 
             //詳細画面を表示
@@ -280,15 +285,16 @@ public class OpinionAction extends ActionBase{
      * @throws IOException
      */
     public void destroy() throws ServletException, IOException {
-        System.out.println("destroy()に入りました！");
         //CSRF対策 tokenのチェック
+
         if (checkToken()) {
-            System.out.println("checkToken()を通過しました！");
+
             //idを条件にご意見・ご要望データを論理削除する
             service.destroy(toNumber(getRequestParam(AttributeConst.OPI_ID)));
-            System.out.println("destroy()を通過しました！");
+
             //セッションに削除完了のフラッシュメッセージを設定
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
 
             //一覧画面にリダイレクト
             redirect(ForwardConst.ACT_OPI,ForwardConst.CMD_INDEX);

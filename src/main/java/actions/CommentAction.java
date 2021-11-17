@@ -6,10 +6,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import actions.views.CommentView;
+import actions.views.EmployeeView;
 import actions.views.OpinionView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
+import constants.MessageConst;
 import services.CommentService;
 
 /*
@@ -52,12 +54,12 @@ public class CommentAction extends ActionBase {
         //全コメントのデータの件数を取得する
         long commentsCount = service.countAll();
 
-
         putRequestScope(AttributeConst.COMMENT, comments); //取得したコメントデータ
         putRequestScope(AttributeConst.COM_COUNT, commentsCount); //全てのコメントデータの件数
         putRequestScope(AttributeConst. PAGE, page); //ページ数
         putRequestScope(AttributeConst. MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
+        System.out.println("コメントのデータの数です" + comments.size());
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
@@ -96,7 +98,7 @@ public class CommentAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-   /* public void create() throws ServletException, IOException {
+    public void create() throws ServletException, IOException {
 
 
         //CSRF対策 tokenのチェック
@@ -105,16 +107,43 @@ public class CommentAction extends ActionBase {
        //セッションからログイン中の従業員情報を取得
            EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
+       //idを条件にご意見・ご要望情報を取得
+           OpinionView ov = service.findOne2(toNumber(getRequestParam(AttributeConst.OPI_ID)));
+           System.out.println(ov.getId());
        //パラメータの値をもとにコメント情報のインスタンスを作成する
        CommentView cv = new CommentView(
                null,
                ev,
-               null,→ご意見情報取得して変数定義してインスタンス作成しないといけないけどどうやって情報取得する？？
+               ov,
                getRequestParam(AttributeConst.COM_CONTENT),
                null,
                null);
+
+
+       //コメント情報登録
+       List<String> errors = service.create(cv);
+
+       if(errors.size() > 0) {
+           //登録中にエラーがあった場合
+
+           putRequestScope(AttributeConst.TOKEN, getTokenId());
+           putRequestScope(AttributeConst.COMMENT, cv);
+           putRequestScope(AttributeConst.ERR, errors);
+
+           //コメント記入画面を再表示する
+           forward(ForwardConst.FW_COM_NEW);
+
+       }else {
+           //登録中にエラーが無かった場合
+
+           //セッションに登録完了のフラッシュメッセージを設定
+           putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
+
+           //一覧画面にリダイレクト
+           redirect(ForwardConst.ACT_COM, ForwardConst.CMD_INDEX);
        }
-    }*/
+     }
+  }
 
 
     /*

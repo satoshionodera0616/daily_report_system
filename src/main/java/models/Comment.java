@@ -36,7 +36,10 @@ import lombok.Setter;
             query = JpaConst.Q_COM_GET_ALL_MINE_DEF),
     @NamedQuery(
             name = JpaConst.Q_COM_COUNT_ALL_MINE,
-            query = JpaConst.Q_COM_COUNT_ALL_MINE_DEF)
+            query = JpaConst.Q_COM_COUNT_ALL_MINE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_COM_GET_REQUEST_ALL,
+            query = JpaConst.Q_COM_GET_REQUEST_ALL_DEF)
 })
 
 @Getter
@@ -56,7 +59,7 @@ public class Comment {
     private Integer id;
 
     /*
-     * コメントをした従業員
+     * コメントを作成した従業員
      */
     @ManyToOne
     @JoinColumn(name = JpaConst.COM_COL_EMP, nullable = false)

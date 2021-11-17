@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import actions.views.CommentConverter;
@@ -101,9 +102,18 @@ public class CommentService extends ServiceBase {
      * @return バリデーションで発生したエラーのリスト
      */
     public List<String> create(CommentView cv){
+
+        //登録日時、更新日時を現在時刻に設定
+
+
         List<String> errors = CommentValidator.validate(cv);
         if(errors.size() == 0) {
+
+            LocalDateTime now = LocalDateTime.now();
+            cv.setCreatedAt(now);
+            cv.setUpdatedAt(now);
             createInternal(cv);
+
         }
 
         //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
@@ -134,7 +144,7 @@ public class CommentService extends ServiceBase {
      * @param id
      * @return 取得データのインスタンス
      */
-    private models.Comment findOneInternal(int id) {
+    private  models.Comment findOneInternal(int id) {
         return em.find(models.Comment.class, id);
     }
 

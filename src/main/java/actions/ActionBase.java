@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.PropertyConst;
+import models.Opinion;
 
 /*
  * 各アクションクラスの親クラス。共通処理を行う
@@ -181,6 +182,19 @@ public abstract class ActionBase {
             number = Integer.MIN_VALUE;
         }
         return number;
+    }
+    
+    /*
+     * ------------------------文字列をOpinion型に変換する-------------------------
+     * @param strNumber
+     * @return 変換後の値
+     */
+    protected Opinion toNumber2(String strNumber) {
+        String str = strNumber;
+        
+        Opinion opinionnumber =  str;
+        return opinionnumber;
+    
     }
 
     /*

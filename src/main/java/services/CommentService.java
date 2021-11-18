@@ -67,6 +67,17 @@ public class CommentService extends ServiceBase {
     }
 
 
+    /**-------------------------------------------------------------------------------------------------------仮で作成
+     * 全てのコメントをidの降順に取得する
+     * @return
+     */
+    public List<CommentView> getAll() {
+        List<models.Comment> comments_list = em.createNamedQuery(JpaConst.Q_COM_GET_ALL, models.Comment.class)
+                .getResultList();
+        return CommentConverter.toViewList(comments_list);
+    }
+
+
     /*
      * コメントテーブルのデータの件数を取得し、返却する
      * @return データの件数
@@ -87,7 +98,7 @@ public class CommentService extends ServiceBase {
         return CommentConverter.toView(findOneInternal(id));
     }
 
-    /*
+    /**
      *idを条件に取得したデータをOpinionViewのインスタンスで返却する
      *@param id
      *@return 取得データのインスタンス
@@ -145,10 +156,11 @@ public class CommentService extends ServiceBase {
      * @return 取得データのインスタンス
      */
     private  models.Comment findOneInternal(int id) {
+        System.out.println("------------------------------"+id+"------------------------------");
         return em.find(models.Comment.class, id);
     }
 
-    /*
+    /**
      * idを条件にデータを1件取得する（ご意見・ご要望情報）
      * @param id
      * @return 取得データのインスタンス

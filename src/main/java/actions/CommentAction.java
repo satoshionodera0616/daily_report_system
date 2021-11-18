@@ -109,7 +109,6 @@ public class CommentAction extends ActionBase {
 
        //idを条件にご意見・ご要望情報を取得
            OpinionView ov = service.findOne2(toNumber(getRequestParam(AttributeConst.OPI_ID)));
-           System.out.println(ov.getId());
        //パラメータの値をもとにコメント情報のインスタンスを作成する
        CommentView cv = new CommentView(
                null,

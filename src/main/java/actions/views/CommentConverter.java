@@ -29,9 +29,7 @@ public class CommentConverter {
      * @return CommentViewのインスタンス
      */
     public static CommentView toView(Comment c) {
-System.out.println("CommentConverterのtoView()に入りました！");
         if(c == null) {
-System.out.println("cはNULLです！");
             return null;
         }
 

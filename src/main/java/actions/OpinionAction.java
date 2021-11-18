@@ -13,6 +13,7 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.CommentService;
 import services.OpinionService;
 
 /*
@@ -44,7 +45,6 @@ public class OpinionAction extends ActionBase  {
      * @throws IOException
      */
     public void index() throws ServletException,IOException{
-
 
         //指定されたページ数の一覧画面に表示するご意見・ご要望データを取得
         int page = getPage();
@@ -177,8 +177,21 @@ public class OpinionAction extends ActionBase  {
         //idを条件にご意見・ご要望データを取得する
         OpinionView ov = service.findOne(toNumber(getRequestParam(AttributeConst.OPI_ID)));
 
-        //取得したidとopinion_idカラムの値が同じなコメントデータを取得する
-        List<CommentView> comments = service.findOne2(toNumber2(getRequestParam(AttributeConst.OPI_ID)));
+        //コメントデータを全て取得する
+        CommentService c = new CommentService();
+
+        List<CommentView> cv = c.getAll();
+
+       /**-----------------------コメントアウトしている部分が、本来行いたいコメントリスト取得のデータ操作です------------------------------------------
+        *
+        *idを条件に、コメントデータを取得する
+        *
+        *
+        *List<CommentView> comments = service.findOpiComment(toNumber(getRequestParam(AttributeConst.OPI_ID)));
+        *
+        *-----------------------------------------------------------------------------------------------------------------------------------------------
+        */
+
 
         if(ov == null || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
@@ -189,7 +202,7 @@ public class OpinionAction extends ActionBase  {
 
 
             putRequestScope(AttributeConst.OPINION, ov);//取得したご意見・ご要望データ
-            putRequestScope(AttributeConst.COMMENTS, comments);//取得したコメントリスト
+            putRequestScope(AttributeConst.COMMENTS, cv);//取得したコメントリスト
 
 
             //詳細画面を表示

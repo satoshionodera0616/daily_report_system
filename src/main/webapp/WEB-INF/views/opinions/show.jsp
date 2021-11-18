@@ -60,7 +60,6 @@
             </p>
         <br /><br />
 
-
         <h3>【この報告に対するコメント 一覧】</h3>
         <table id="comment_list">
             <tbody>
@@ -71,13 +70,16 @@
                 </tr>
                 <c:forEach var="comment" items="${comments}" varStatus="status">
                     <tr class="row${status.count % 2}">
+                    <c:if test="${comment.opinion.id == opinion.id}">
 
                         <td><c:out value="${comment.employee.name}" /></td>
-                        <td>${comment.content}</td>
-                        <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()
-                            || sessionScope.login_employee.id == comment.employee.id} ">
-                            <td><a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a></td>
-                        </c:if>
+                        <td><c:out value="${comment.content}" /></td>
+                        <td>
+                            <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue() || sessionScope.login_employee.id == comment.employee.id}">
+                                <a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a>
+                            </c:if>
+                        </td>
+                    </c:if>
                     </tr>
                 </c:forEach>
             </tbody>

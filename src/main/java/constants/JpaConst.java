@@ -89,7 +89,7 @@ public interface JpaConst {
     String JPQL_PARM_EMPLOYEE = "employee";//従業員
 
     // 仮で作成-------------------------------------------------------------
-    String JPQL_PARM_ID = "id";
+    String JPQL_PARM_OPINION = "opinion";
     // ---------------------------------------------------------------------
 
     // NamedQueryの nameとquery
@@ -145,7 +145,7 @@ public interface JpaConst {
     String Q_COM_COUNT_ALL_MINE = ENTITY_COM + ".countAllMine";
     String Q_COM_COUNT_ALL_MINE_DEF = "SELECT COUNT(c) FROM Comment AS c WHERE c.employee = :" + JPQL_PARM_EMPLOYEE;
 
-    // opinion_idカラムの値がリクエストidの値と同じなコメントをidの降順に取得する----------------------------------------------------------------------------------仮で作成
+    // opinion_idカラムの値がリクエストidの値と同じなコメントをidの降順に取得する-----------------------------------------------------
     String Q_COM_GET_REQUEST_ALL = ENTITY_COM + ".getAllOpinionComment";
-    String Q_COM_GET_REQUEST_ALL_DEF = "SELECT c FROM Comment AS c WHERE c.opinion = :" + COM_COL_OPI + " ORDER BY c.id DESC";
+    String Q_COM_GET_REQUEST_ALL_DEF = "SELECT c FROM Comment AS c WHERE c.opinion = :" + JPQL_PARM_OPINION + " ORDER BY c.id DESC";
 }

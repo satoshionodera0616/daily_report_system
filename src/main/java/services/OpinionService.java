@@ -3,14 +3,11 @@ package services;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import actions.views.CommentConverter;
-import actions.views.CommentView;
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
 import actions.views.OpinionConverter;
 import actions.views.OpinionView;
 import constants.JpaConst;
-import models.Comment;
 import models.Opinion;
 import models.validators.OpinionValidator;
 
@@ -58,8 +55,8 @@ public class OpinionService extends ServiceBase {
     public List<OpinionView> getAllPerPage(int page){
 
         List<Opinion> opinions = em.createNamedQuery(JpaConst.Q_OPI_GET_ALL, Opinion.class)
-                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
-                .setMaxResults(JpaConst.ROW_PER_PAGE)
+                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))//setFirstResult→検索結果の開始位置
+                .setMaxResults(JpaConst.ROW_PER_PAGE)//setMaxResults→検索結果の最大数----0から15件、15から15件、のようにして検索結果を取得している
                 .getResultList();
         return OpinionConverter.toViewList(opinions);
     }
@@ -84,14 +81,21 @@ public class OpinionService extends ServiceBase {
 
     }
 
-    /**------------------------------------------------------------------
+
+
+
+    /**---------------------------------コメントアウトしている部分が、本来行いたいコメントリスト取得のデータ操作です------------------------------
      * idを条件に取得したデータをCommentViewのインスタンスで返却する
      * @param id
      * @return 取得データのインスタンス
-     */
-    public List<CommentView> findOne2(Opinion id) {
-        return CommentConverter.toViewList(findOneInternal2(id));
+     *
+    public List<CommentView> findOpiComment(int id) {
+        return CommentConverter.toViewList(findOpiCommentInternal(id));
     }
+    *
+    *---------------------------------------------------------------------------------------------
+    /
+
 
     /*
      * 画面から入力されたご意見・ご要望の登録内容を元にデータを1件作成し、ご意見・ご要望テーブルに登録する
@@ -171,21 +175,29 @@ public class OpinionService extends ServiceBase {
     }
 
 
-    /**--------------------------------------------------------find()→主キーでの検索しかできないので、NamedQueryを定義して使用する
-     * idを条件に該当するデータ（レコード内容）を全て取得する（コメント情報）
-     * @param id
+    /**----------------------------コメントアウトしている部分が、本来行いたいコメントリスト取得のデータ操作です---------------------------------
+     *リクエストidの値が、コメントデータのopinion_idの値に該当するコメントデータのリストを取得する
+     *
+     *
+     * 使用しているNamedQuery
+     *String Q_COM_GET_REQUEST_ALL = ENTITY_COM + ".getAllOpinionComment";
+     *String Q_COM_GET_REQUEST_ALL_DEF = "SELECT c FROM Comment AS c WHERE c.opinion = :" + JPQL_PARM_OPINION + " ORDER BY c.id DESC";
+     *
+     *
+     *
+     * @param コメントデータのインスタンス
      * @return 取得データのインスタンス
-     */
-    private List<Comment> findOneInternal2(Opinion id) {
-System.out.println("findOneInternal2に入りました-----------------------------------------"+id);
+     *
+    private List<Comment> findOpiCommentInternal(int id) {
 
-        List<Comment> opinion_comments = em.createNamedQuery(JpaConst.Q_COM_GET_REQUEST_ALL, models.Comment.class)
-                .setParameter(JpaConst.COM_COL_OPI, id)
+        List<Comment> opinion_comments = em.createNamedQuery(JpaConst.Q_COM_GET_REQUEST_ALL, models.Comment.class)//第二引数 クエリ実行結果を格納するクラス
+                .setParameter(JpaConst.JPQL_PARM_OPINION, id)
                 .getResultList();
-System.out.println("createNamedQueryを抜けました------------------------------------------");
         return opinion_comments;
     }
-
+    *
+    *--------------------------------------------------------------------------------------------------------------------
+     /
 
     /*
      * ご意見・ご要望データを1件登録する

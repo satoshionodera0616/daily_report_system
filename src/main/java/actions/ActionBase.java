@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.PropertyConst;
-import models.Opinion;
 
 /*
  * 各アクションクラスの親クラス。共通処理を行う
@@ -163,7 +162,7 @@ public abstract class ActionBase {
     protected int getPage() {
         int page;
         page = toNumber(request.getParameter(AttributeConst.PAGE.getValue()));
-        if(page == Integer.MIN_VALUE) {
+        if(page == Integer.MIN_VALUE) {//MIN＿VALUE→Integerが保持できる最小の値
             page = 1;
         }
         return page;
@@ -183,19 +182,7 @@ public abstract class ActionBase {
         }
         return number;
     }
-    
-    /*
-     * ------------------------文字列をOpinion型に変換する-------------------------
-     * @param strNumber
-     * @return 変換後の値
-     */
-    protected Opinion toNumber2(String strNumber) {
-        String str = strNumber;
-        
-        Opinion opinionnumber =  str;
-        return opinionnumber;
-    
-    }
+
 
     /*
      * 文字列をLocalDate型に変換する

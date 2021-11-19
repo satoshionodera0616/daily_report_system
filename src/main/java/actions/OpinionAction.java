@@ -187,10 +187,8 @@ public class OpinionAction extends ActionBase  {
         *idを条件に、コメントデータを取得する
         *
         *
-        *List<CommentView> comments = service.findOpiComment(toNumber(getRequestParam(AttributeConst.OPI_ID)));
-        *
-        *-----------------------------------------------------------------------------------------------------------------------------------------------
         */
+        List<CommentView> comments = service.findOpiComment(ov);
 
 
         if(ov == null || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
@@ -202,7 +200,8 @@ public class OpinionAction extends ActionBase  {
 
 
             putRequestScope(AttributeConst.OPINION, ov);//取得したご意見・ご要望データ
-            putRequestScope(AttributeConst.COMMENTS, cv);//取得したコメントリスト
+//            putRequestScope(AttributeConst.COMMENTS, cv);//取得した全件のコメントリスト
+            putRequestScope(AttributeConst.COMMENTS, comments);//取得した該当のコメントリスト
 
 
             //詳細画面を表示
@@ -225,7 +224,7 @@ public class OpinionAction extends ActionBase  {
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
         if(ov == null || ev.getId() != ov.getEmployee().getId() || ov.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
-            System.out.println("編集画面の条件チェックを通過しました！");
+
             /*
              * 該当のご意見・ご要望データが存在しない、または
              * ログインしている従業員がご意見・ご要望の報告者でない、または

@@ -83,7 +83,7 @@ public class CommentAction extends ActionBase {
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策
 
         //idを条件に、記入ページに表示するご意見・ご要望の情報を取得
-        OpinionView ov = service.findOne2(toNumber(getRequestParam(AttributeConst.OPI_ID)));
+        OpinionView ov = service.findOneOpinion(toNumber(getRequestParam(AttributeConst.OPI_ID)));
 
         putRequestScope(AttributeConst.OPINION, ov);
 
@@ -108,7 +108,7 @@ public class CommentAction extends ActionBase {
            EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
        //idを条件にご意見・ご要望情報を取得
-           OpinionView ov = service.findOne2(toNumber(getRequestParam(AttributeConst.OPI_ID)));
+           OpinionView ov = service.findOneOpinion(toNumber(getRequestParam(AttributeConst.OPI_ID)));
        //パラメータの値をもとにコメント情報のインスタンスを作成する
        CommentView cv = new CommentView(
                null,
@@ -146,22 +146,113 @@ public class CommentAction extends ActionBase {
 
 
     /*
-     * コメント詳細画面（ご意見・ご要望詳細画面）を表示する
+     * コメント編集画面を表示する（edit）
+     * @throws ServletException
+     * @throws IOException
      */
+    public void edit() throws ServletException, IOException{
 
 
-    /*
-     * コメント編集ページを表示する（edit）
-     */
+       OpinionView ov = service.findOneOpinion(toNumber(getRequestParam(AttributeConst.OPI_COMMENTEDIT_ID)));
+
+
+       CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+
+
+       EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+
+       if(cv == null || ev.getId() != cv.getEmployee().getId()) {
+
+           // 該当のコメントデータが存在しない、または
+           // ログインしている従業員がコメントの作成者でない場合はエラー画面を表示
+           forward(ForwardConst.FW_ERR_UNKNOWN);
+
+       }else {
+
+
+           putRequestScope(AttributeConst.TOKEN, getTokenId());
+           putRequestScope(AttributeConst.COMMENT, cv);
+           putRequestScope(AttributeConst.OPINION, ov);
+
+           //編集画面を表示
+           forward(ForwardConst.FW_COM_EDIT);
+       }
+    }
 
 
     /*
      * コメントの登録内容を更新する（update）
+     * @throws ServletException
+     * @throws IOException
      */
+    public void update() throws ServletException, IOException{
+
+        //CSRF対策
+        if(checkToken()) {
+
+
+            CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+
+
+            cv.setContent(getRequestParam(AttributeConst.COM_CONTENT));
+
+
+            //コメントデータを更新する
+            List<String> errors = service.update(cv);
+
+
+            if(errors.size() > 0) {
+                //更新中にエラーが発生した場合
+
+                putRequestScope(AttributeConst.TOKEN, getTokenId()); // CSRF対策用トークン
+                putRequestScope(AttributeConst.COMMENT, cv); // 入力されたコメント情報
+                putRequestScope(AttributeConst.ERR, errors); // エラーのリスト
+
+                //編集画面を再表示
+                forward(ForwardConst.FW_COM_EDIT);
+
+            }else {
+                //更新中にエラーがなかった場合
+
+                //セッションに更新完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH,MessageConst.I_UPDATED.getMessage());
+
+                //一覧画面にリダイレクト
+                redirect(ForwardConst.ACT_OPI, ForwardConst.CMD_INDEX);
+            }
+        }
+
+    }
+
 
 
     /*
      * コメントを削除する（destroy）
+     * @throws ServletException
+     * @throws IOException
      */
+    public void destroy() throws ServletException, IOException{
+
+
+        // CSRF対策 tokenのチェック
+        if( checkToken()) {
+
+
+            // idを条件にコメントデータを1件取得する
+            CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+
+            // 取得したデータを物理削除する
+            service.destroy(cv);
+
+            // セッションに削除完了のフラッシュメッセージを設定
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+
+            // 一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
+        }
+
+    }
 
 }

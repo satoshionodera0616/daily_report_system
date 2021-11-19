@@ -67,7 +67,7 @@ public class CommentService extends ServiceBase {
     }
 
 
-    /**-------------------------------------------------------------------------------------------------------仮で作成
+    /**-------------------------------------------------------------------------------------------------------仮で作成 使わなければ削除
      * 全てのコメントをidの降順に取得する
      * @return
      */
@@ -103,8 +103,8 @@ public class CommentService extends ServiceBase {
      *@param id
      *@return 取得データのインスタンス
      */
-    public OpinionView findOne2(int id) {
-        return OpinionConverter.toView(findOneInternal2(id));
+    public OpinionView findOneOpinion(int id) {
+        return OpinionConverter.toView(findOneOpinionInternal(id));
     }
 
     /*
@@ -150,13 +150,28 @@ public class CommentService extends ServiceBase {
         return errors;
     }
 
+
+    /**
+     * 物理削除を実行する
+     * @param cv
+     */
+    public void destroy(CommentView cv) {
+
+        System.out.println("----------------------------destroy()に入りました。物理削除を行います"+ cv.getContent());
+
+        em.getTransaction().begin();
+        em.remove(CommentConverter.toModel(cv)); //データ削除
+        em.getTransaction().commit();
+
+    }
+
+
     /*
      * idを条件にデータを1件取得する（コメント情報）
      * @param id
      * @return 取得データのインスタンス
      */
     private  models.Comment findOneInternal(int id) {
-        System.out.println("------------------------------"+id+"------------------------------");
         return em.find(models.Comment.class, id);
     }
 
@@ -165,9 +180,11 @@ public class CommentService extends ServiceBase {
      * @param id
      * @return 取得データのインスタンス
      */
-    private models.Opinion findOneInternal2(int id){
+    private models.Opinion findOneOpinionInternal(int id){
         return em.find(models.Opinion.class, id);
     }
+
+
 
     /*
      * コメントデータを1件登録する

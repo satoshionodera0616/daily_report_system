@@ -87,10 +87,9 @@ public interface JpaConst {
     String JPQL_PARM_CODE = "code";//社員番号
     String JPQL_PARM_PASSWORD = "password";//パスワード
     String JPQL_PARM_EMPLOYEE = "employee";//従業員
+    String JPQL_PARM_OPINION = "opinion";//ご意見
 
-    // 仮で作成-------------------------------------------------------------
-    String JPQL_PARM_OPINION = "opinion";
-    // ---------------------------------------------------------------------
+    String JPQL_PARM_COMMENT = "comment";//コメント
 
     // NamedQueryの nameとquery
     // 全ての従業員をidの降順に取得する
@@ -148,4 +147,8 @@ public interface JpaConst {
     // opinion_idカラムの値がリクエストidの値と同じなコメントをidの降順に取得する-----------------------------------------------------
     String Q_COM_GET_REQUEST_ALL = ENTITY_COM + ".getAllOpinionComment";
     String Q_COM_GET_REQUEST_ALL_DEF = "SELECT c FROM Comment AS c WHERE c.opinion = :" + JPQL_PARM_OPINION + " ORDER BY c.id DESC";
+
+    // idの値がリクエストidの値と同じなご意見・ご要望情報を取得する
+    String Q_COM_GET_REQUEST_OPINION_ALL = ENTITY_COM + ".getCommentOpinion";
+    String Q_COM_GET_REQUEST_OPINION_ALL_DEF = "SELECT o FROM Opinion AS o WHERE o.id = :" + JPQL_PARM_COMMENT;
 }

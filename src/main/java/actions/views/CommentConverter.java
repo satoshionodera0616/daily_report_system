@@ -38,8 +38,8 @@ public class CommentConverter {
                 EmployeeConverter.toView(c.getEmployee()),
                 OpinionConverter.toView(c.getOpinion()),
                 c.getContent(),
-                null,
-                null);
+                c.getCreatedAt(),
+                c.getUpdatedAt());
 
     }
 
@@ -64,12 +64,14 @@ public class CommentConverter {
      * @param cv Viewモデル
      */
     public static void copyViewToModel(Comment c, CommentView cv) {
+
         c.setId(cv.getId());
         c.setEmployee(EmployeeConverter.toModel(cv.getEmployee()));
         c.setOpinion(OpinionConverter.toModel(cv.getOpinion()));
         c.setContent(cv.getContent());
         c.setCreatedAt(cv.getCreatedAt());
         c.setUpdatedAt(cv.getUpdatedAt());
+
     }
 
     /*

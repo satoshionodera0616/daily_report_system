@@ -3,11 +3,14 @@ package services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import actions.views.CommentConverter;
+import actions.views.CommentView;
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
 import actions.views.OpinionConverter;
 import actions.views.OpinionView;
 import constants.JpaConst;
+import models.Comment;
 import models.Opinion;
 import models.validators.OpinionValidator;
 
@@ -88,13 +91,10 @@ public class OpinionService extends ServiceBase {
      * idを条件に取得したデータをCommentViewのインスタンスで返却する
      * @param id
      * @return 取得データのインスタンス
-     *
-    public List<CommentView> findOpiComment(int id) {
-        return CommentConverter.toViewList(findOpiCommentInternal(id));
+     */
+    public List<CommentView> findOpiComment(OpinionView ov) {
+        return CommentConverter.toViewList(findOpiCommentInternal(ov));
     }
-    *
-    *---------------------------------------------------------------------------------------------
-    /
 
 
     /*
@@ -187,17 +187,14 @@ public class OpinionService extends ServiceBase {
      *
      * @param コメントデータのインスタンス
      * @return 取得データのインスタンス
-     *
-    private List<Comment> findOpiCommentInternal(int id) {
+     */
+    private List<Comment> findOpiCommentInternal(OpinionView ov) {
 
         List<Comment> opinion_comments = em.createNamedQuery(JpaConst.Q_COM_GET_REQUEST_ALL, models.Comment.class)//第二引数 クエリ実行結果を格納するクラス
-                .setParameter(JpaConst.JPQL_PARM_OPINION, id)
+                .setParameter(JpaConst.JPQL_PARM_OPINION, OpinionConverter.toModel(ov))
                 .getResultList();
         return opinion_comments;
     }
-    *
-    *--------------------------------------------------------------------------------------------------------------------
-     /
 
     /*
      * ご意見・ご要望データを1件登録する

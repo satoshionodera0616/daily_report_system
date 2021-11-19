@@ -70,16 +70,13 @@
                 </tr>
                 <c:forEach var="comment" items="${comments}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                    <c:if test="${comment.opinion.id == opinion.id}">
-
                         <td><c:out value="${comment.employee.name}" /></td>
                         <td><c:out value="${comment.content}" /></td>
                         <td>
                             <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue() || sessionScope.login_employee.id == comment.employee.id}">
-                                <a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a>
+                                <a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}&edit_id=${opinion.id}' />">このコメントを編集する</a>
                             </c:if>
                         </td>
-                    </c:if>
                     </tr>
                 </c:forEach>
             </tbody>

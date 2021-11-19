@@ -5,12 +5,14 @@ import java.util.List; //追記
 
 import javax.servlet.ServletException;
 
+import actions.views.CommentView;
 import actions.views.EmployeeView; //追記
 import actions.views.OpinionView;
 import actions.views.ReportView; //追記
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;  //追記
+import services.CommentService;
 import services.OpinionService;
 import services.ReportService;  //追記
 
@@ -21,7 +23,8 @@ import services.ReportService;  //追記
 public class TopAction extends ActionBase {
 
     private ReportService r_service; //追記
-    private OpinionService o_service; //オリジナル
+    private OpinionService o_service;
+    private CommentService c_service;
 
 
     /**
@@ -31,14 +34,16 @@ public class TopAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         r_service = new ReportService(); //追記
-        o_service = new OpinionService(); //オリジナル
+        o_service = new OpinionService();
+        c_service = new CommentService();
 
 
         //メソッドを実行
         invoke();
 
         r_service.close(); //追記
-        o_service.close(); //オリジナル
+        o_service.close();
+        c_service.close();
 
     }
 
@@ -57,29 +62,42 @@ public class TopAction extends ActionBase {
         int r_page = getPage();
         List<ReportView> reports = r_service.getMinePerPage(loginEmployee, r_page);
 
-        //オリジナル  ログイン中の従業員が作成したご意見・ご要望データを、指定されたページ数の一覧画面に表示する分取得する
+        //ログイン中の従業員が作成したご意見・ご要望データを、指定されたページ数の一覧画面に表示する分取得する
         int o_page = getPage();
         List<OpinionView> opinions = o_service.getMinePerPage(loginEmployee, o_page);
+
+        //ログイン中の従業員が作成したご意見・ご要望データを、指定されたページ数の一覧画面に表示する分取得する
+        int c_page = getPage();
+        List<CommentView> comments = c_service.getMinePerPage(loginEmployee, c_page);
 
 
         //ログイン中の従業員が作成した日報データの件数を取得
         long myReportsCount = r_service.countAllMine(loginEmployee);
         //オリジナル  ログイン中の従業員が作成したご意見・ご要望データの件数を取得
         long myOpinionsCount = o_service.countAllMine(loginEmployee);
+        //ログイン中の従業員が作成したコメントデータの件数を取得
+        long myCommentsCount = c_service.countAllMine(loginEmployee);
+
+
+
 
         putRequestScope(AttributeConst.REPORTS, reports); //取得した日報データ
         putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //ログイン中の従業員が作成した日報の数
         putRequestScope(AttributeConst.PAGE, r_page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
-        //オリジナル  ログイン中の従業員が作成したご意見・ご要望データの件数を取得
         putRequestScope(AttributeConst.OPINIONS, opinions); //取得したご意見・ご要望データ
         putRequestScope(AttributeConst.OPI_COUNT, myOpinionsCount); //ログイン中の従業員が作成したご意見・ご要望の数
         putRequestScope(AttributeConst.PAGE, o_page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
+        putRequestScope(AttributeConst.COMMENTS, comments);
+        putRequestScope(AttributeConst.COM_COUNT, myCommentsCount);
+        putRequestScope(AttributeConst.PAGE, c_page);
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
 
-        //↑ここまで追記
+
+
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);

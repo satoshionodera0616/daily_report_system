@@ -59,9 +59,7 @@ public class CommentAction extends ActionBase {
         putRequestScope(AttributeConst. PAGE, page); //ページ数
         putRequestScope(AttributeConst. MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
-        System.out.println("コメントのデータの数です" + comments.size());
-
-        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替えて、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
         if(flush != null) {
             putRequestScope(AttributeConst.FLUSH, flush);
@@ -123,8 +121,8 @@ public class CommentAction extends ActionBase {
        List<String> errors = service.create(cv);
 
        if(errors.size() > 0) {
-           //登録中にエラーがあった場合
 
+           //登録中にエラーがあった場合
            putRequestScope(AttributeConst.TOKEN, getTokenId());
            putRequestScope(AttributeConst.COMMENT, cv);
            putRequestScope(AttributeConst.ERR, errors);
@@ -213,6 +211,7 @@ public class CommentAction extends ActionBase {
                 forward(ForwardConst.FW_COM_EDIT);
 
             }else {
+
                 //更新中にエラーがなかった場合
 
                 //セッションに更新完了のフラッシュメッセージを設定

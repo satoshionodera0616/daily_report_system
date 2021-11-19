@@ -87,9 +87,7 @@
                             </c:choose>
                         </td>
                     </tr>
-
                 </c:forEach>
-
             </tbody>
         </table>
         <div id="pagination">
@@ -104,10 +102,59 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
-
         </div>
 
-
         <p><a href="<c:url value='?action=${actOpi}&command=${commNew}' />">新規報告の作成</a></p>
+
+<c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}">
+        <h3>自分が作成したコメント 一覧</h3>
+        <table id="comment_list">
+            <tbody>
+                <tr>
+                    <th class="opinion_name">報告者</th>
+                    <th class="opinion_date">ご意見を頂戴した日付</th>
+                    <th class="opinion_overview">概要</th>
+                    <th class="comment_name">コメント作成者</th>
+                    <th class="comment_content">コメント内容</th>
+                    <th class="comment_action">操作</th>
+                </tr>
+               <c:forEach var="comment" items="${comments}" varStatus="status">
+                <fmt:parseDate value="${comment.opinion.opinionDate}" pattern="yyyy-MM-dd" var="opinionDay" type="date" /> <%--文字列を日付データに変換 --%>
+
+
+                <tr>
+                    <td class="opinion_name"><c:out value="${comment.opinion.employee.name}" /></td>
+                    <td class="opinion_date"><fmt:formatDate value='${opinionDay}' pattern='yyyy-MM-dd' /></td>
+                    <td class="opinion_overview"><c:out value="${comment.opinion.overView}" /></td>
+                    <td class="comment_name"><c:out value="${comment.employee.name}" /></td>
+                    <td class="comment_content"><div class="comment_width"><c:out value="${comment.content}" /></div></td>
+                    <td class="comment_action">
+                        <c:choose>
+                            <c:when test="${comment.opinion.deleteFlag == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()}">
+                                <p>(報告が削除されています)</p>
+                            </c:when>
+                            <c:otherwise>
+                                <a href=" <c:url value='?action=${actOpi}&command=${commShow}&id=${comment.opinion.id}' />">報告内容・コメントの詳細を見る</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+               </c:forEach>
+            </tbody>
+        </table>
+        <div id="pagination">
+            (全 ${comments_count} 件) <br />
+            <c:forEach var="i" begin="1" end="${((comments_count - 1) / maxRow) + 1}" step="1">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <c:out value="${i}" />&nbsp;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value='?action=${actCom}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+</c:if>
     </c:param>
 </c:import>

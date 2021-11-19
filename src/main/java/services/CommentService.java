@@ -36,6 +36,7 @@ public class CommentService extends ServiceBase {
 
     }
 
+
     /*
      * 指定した従業員が作成したコメントデータの件数を取得し、返却する
      * @param employee
@@ -58,23 +59,11 @@ public class CommentService extends ServiceBase {
      */
     public List<CommentView> getAllPerPage(int page){
 
-
         List<models.Comment> comments = em.createNamedQuery(JpaConst.Q_COM_GET_ALL, models.Comment.class)
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();
         return CommentConverter.toViewList(comments);
-    }
-
-
-    /**-------------------------------------------------------------------------------------------------------仮で作成 使わなければ削除
-     * 全てのコメントをidの降順に取得する
-     * @return
-     */
-    public List<CommentView> getAll() {
-        List<models.Comment> comments_list = em.createNamedQuery(JpaConst.Q_COM_GET_ALL, models.Comment.class)
-                .getResultList();
-        return CommentConverter.toViewList(comments_list);
     }
 
 
@@ -98,7 +87,8 @@ public class CommentService extends ServiceBase {
         return CommentConverter.toView(findOneInternal(id));
     }
 
-    /**
+
+    /*
      *idを条件に取得したデータをOpinionViewのインスタンスで返却する
      *@param id
      *@return 取得データのインスタンス
@@ -106,6 +96,7 @@ public class CommentService extends ServiceBase {
     public OpinionView findOneOpinion(int id) {
         return OpinionConverter.toView(findOneOpinionInternal(id));
     }
+
 
     /*
      * 画面から入力されたコメントの登録内容を元にデータを1件作成し、コメントテーブルに登録する
@@ -131,6 +122,7 @@ public class CommentService extends ServiceBase {
         return errors;
     }
 
+
     /*
      * 画面から入力されたコメントの登録内容を元に、コメントデータを更新する
      * @param cv コメントの更新内容
@@ -151,7 +143,7 @@ public class CommentService extends ServiceBase {
     }
 
 
-    /**
+    /*
      * 物理削除を実行する
      * @param cv
      */
@@ -174,7 +166,8 @@ public class CommentService extends ServiceBase {
         return em.find(models.Comment.class, id);
     }
 
-    /**
+
+    /*
      * idを条件にデータを1件取得する（ご意見・ご要望情報）
      * @param id
      * @return 取得データのインスタンス
@@ -182,7 +175,6 @@ public class CommentService extends ServiceBase {
     private models.Opinion findOneOpinionInternal(int id){
         return em.find(models.Opinion.class, id);
     }
-
 
 
     /*
@@ -197,6 +189,7 @@ public class CommentService extends ServiceBase {
 
 
     }
+
 
     /*
      * コメントデータを更新する

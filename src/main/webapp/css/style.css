@@ -194,3 +194,12 @@ table#opinion_list .opinion_overview{
 table#opinion_list .opinion_action{
     width: 13%;
 }
+table#comment_list .comment_content{
+    width:40%;
+}
+table#comment_list .comment_width{
+    width:90%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}

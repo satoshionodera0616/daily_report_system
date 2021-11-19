@@ -13,7 +13,6 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
-import services.CommentService;
 import services.OpinionService;
 
 /*
@@ -87,7 +86,6 @@ public class OpinionAction extends ActionBase  {
 
 
         //あらかじめご意見・ご要望情報の空インスタンスに、ご意見・ご要望を報告した日付＝今日の日付を設定しておく
-
         OpinionView ov = new OpinionView();
         ov.setOpinionDate(LocalDate.now());
         putRequestScope(AttributeConst.OPINION, ov); //日付のみ設定済みのご意見・ご要望インスタンス
@@ -177,16 +175,9 @@ public class OpinionAction extends ActionBase  {
         //idを条件にご意見・ご要望データを取得する
         OpinionView ov = service.findOne(toNumber(getRequestParam(AttributeConst.OPI_ID)));
 
-        //コメントデータを全て取得する
-        CommentService c = new CommentService();
 
-        List<CommentView> cv = c.getAll();
-
-       /**-----------------------コメントアウトしている部分が、本来行いたいコメントリスト取得のデータ操作です------------------------------------------
-        *
+       /*
         *idを条件に、コメントデータを取得する
-        *
-        *
         */
         List<CommentView> comments = service.findOpiComment(ov);
 
@@ -200,7 +191,6 @@ public class OpinionAction extends ActionBase  {
 
 
             putRequestScope(AttributeConst.OPINION, ov);//取得したご意見・ご要望データ
-//            putRequestScope(AttributeConst.COMMENTS, cv);//取得した全件のコメントリスト
             putRequestScope(AttributeConst.COMMENTS, comments);//取得した該当のコメントリスト
 
 

@@ -19,6 +19,7 @@ import models.validators.OpinionValidator;
  */
 public class OpinionService extends ServiceBase {
 
+
     /*
      * 指定した従業員が作成したご意見・ご要望データを、指定されたページ数の一覧画面に表示する分取得しOpinionViewのリストで返却する
      * @param employee 従業員
@@ -35,6 +36,7 @@ public class OpinionService extends ServiceBase {
         return OpinionConverter.toViewList(opinions);
     }
 
+
     /*
      * 指定した従業員が作成したご意見・ご要望データの件数を取得し、返却する
      * @param employee
@@ -50,6 +52,7 @@ public class OpinionService extends ServiceBase {
         return count;
     }
 
+
     /*
      * 指定されたページ数の一覧画面に表示するご意見・ご要望データを取得し、OpinionViewのリストで返却する
      * @param page ページ数
@@ -64,6 +67,7 @@ public class OpinionService extends ServiceBase {
         return OpinionConverter.toViewList(opinions);
     }
 
+
     /*
      * ご意見・ご要望テーブルのデータの件数を取得し、返却する
      * @return データの件数
@@ -73,6 +77,7 @@ public class OpinionService extends ServiceBase {
                 .getSingleResult();
         return opinions_count;
     }
+
 
     /*
      * idを条件に取得したデータをOpinionViewのインスタンスで返却する
@@ -85,10 +90,7 @@ public class OpinionService extends ServiceBase {
     }
 
 
-
-
-    /**---------------------------------コメントアウトしている部分が、本来行いたいコメントリスト取得のデータ操作です------------------------------
-     * idを条件に取得したデータをCommentViewのインスタンスで返却する
+    /* idを条件に取得したデータをCommentViewのインスタンスで返却する
      * @param id
      * @return 取得データのインスタンス
      */
@@ -115,6 +117,7 @@ public class OpinionService extends ServiceBase {
         return errors;
     }
 
+
     /*
      *画面から入力されたご意見・ご要望の登録内容を元に、ご意見・ご要望データを更新する
      *@param ov ご意見・ご要望の更新内容
@@ -138,6 +141,7 @@ public class OpinionService extends ServiceBase {
         //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
         return errors;
     }
+
 
     /*
      * idを条件にご意見・ご要望データを倫理削除する
@@ -175,16 +179,7 @@ public class OpinionService extends ServiceBase {
     }
 
 
-    /**----------------------------コメントアウトしている部分が、本来行いたいコメントリスト取得のデータ操作です---------------------------------
-     *リクエストidの値が、コメントデータのopinion_idの値に該当するコメントデータのリストを取得する
-     *
-     *
-     * 使用しているNamedQuery
-     *String Q_COM_GET_REQUEST_ALL = ENTITY_COM + ".getAllOpinionComment";
-     *String Q_COM_GET_REQUEST_ALL_DEF = "SELECT c FROM Comment AS c WHERE c.opinion = :" + JPQL_PARM_OPINION + " ORDER BY c.id DESC";
-     *
-     *
-     *
+    /*リクエストidの値が、コメントデータのopinion_idの値に該当するコメントデータのリストを取得する
      * @param コメントデータのインスタンス
      * @return 取得データのインスタンス
      */
@@ -195,6 +190,7 @@ public class OpinionService extends ServiceBase {
                 .getResultList();
         return opinion_comments;
     }
+
 
     /*
      * ご意見・ご要望データを1件登録する
@@ -209,6 +205,7 @@ public class OpinionService extends ServiceBase {
 
 
     }
+
 
     /*
      * ご意見・ご要望データを更新する

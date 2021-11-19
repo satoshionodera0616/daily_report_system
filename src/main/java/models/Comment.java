@@ -42,7 +42,7 @@ import lombok.Setter;
             query = JpaConst.Q_COM_GET_REQUEST_ALL_DEF),
     @NamedQuery(
            name = JpaConst.Q_COM_GET_REQUEST_OPINION_ALL,
-           query = JpaConst.Q_COM_GET_REQUEST_OPINION_ALL_DEF)
+           query = JpaConst.Q_COM_GET_REQUEST_OPINION_ALL_DEF),
 })
 
 @Getter

@@ -49,7 +49,7 @@
         </form>
         <script>
             function confirmDestroy(){
-                if(confirm("本当に削除してよろしいですか？")){
+                if(confirm("コメントの内容は一度削除すると元に戻りません！本当に削除してよろしいですか？")){
                     document.forms[1].submit();
                 }
             }

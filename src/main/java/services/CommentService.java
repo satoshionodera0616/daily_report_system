@@ -155,12 +155,11 @@ public class CommentService extends ServiceBase {
      * 物理削除を実行する
      * @param cv
      */
-    public void destroy(CommentView cv) {
+    public void destroy(int cv) {
 
-        System.out.println("----------------------------destroy()に入りました。物理削除を行います"+ cv.getContent());
 
         em.getTransaction().begin();
-        em.remove(CommentConverter.toModel(cv)); //データ削除
+        em.remove(findOneInternal(cv));
         em.getTransaction().commit();
 
     }

@@ -240,7 +240,7 @@ public class CommentAction extends ActionBase {
 
 
             // idを条件にコメントデータを1件取得する
-            CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+            int cv = toNumber(getRequestParam(AttributeConst.COM_ID));
 
             // 取得したデータを物理削除する
             service.destroy(cv);
@@ -250,7 +250,7 @@ public class CommentAction extends ActionBase {
 
 
             // 一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
+            redirect(ForwardConst.ACT_OPI,ForwardConst.CMD_INDEX);
         }
 
     }

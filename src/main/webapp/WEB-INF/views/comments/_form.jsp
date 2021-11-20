@@ -19,6 +19,7 @@
 <textarea name="${AttributeConst.COM_CONTENT.getValue()}" rows="10" cols="50">${comment.content}</textarea>
 <br /><br />
 
+<input type="hidden" name="${AttributeConst.OPI_ID.getValue()}" value="${opinion.id}" />
 <input type="hidden" name="${AttributeConst.COM_ID.getValue()}" value="${comment.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
 <button type="submit">投稿</button>
